@@ -34,5 +34,5 @@
   "maxPayload": 4000,
   "avgPayload": 1188.107594936709,
   "maxDepthReached": 4,
-  "buildMs": 255
+  "buildMs": 149
 }
