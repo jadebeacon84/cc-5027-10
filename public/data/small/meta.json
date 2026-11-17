@@ -1,0 +1,172 @@
+{
+  "dataset": "small",
+  "title": "Small mixed scan — fast validation dataset",
+  "generator": "scripts/generators.ts",
+  "description": "synthetic small scan, 187721 points, 3 stations",
+  "seed": 20261117,
+  "worldBounds": {
+    "min": [
+      -5.261,
+      -2.806,
+      -6.685
+    ],
+    "max": [
+      7.323,
+      3.899,
+      5.261
+    ]
+  },
+  "totalPoints": 187721,
+  "scanCount": 3,
+  "stations": [
+    {
+      "id": 0,
+      "position": [
+        4.5,
+        1.7,
+        0.5
+      ],
+      "yaw": -3.0309354324158977,
+      "pitch": -0.1,
+      "fov": 1.3089969389957472,
+      "pointCount": 50098
+    },
+    {
+      "id": 1,
+      "position": [
+        -3.4,
+        1.7,
+        2.8
+      ],
+      "yaw": -0.6889243882148613,
+      "pitch": -0.1,
+      "fov": 1.3089969389957472,
+      "pointCount": 29848
+    },
+    {
+      "id": 2,
+      "position": [
+        0,
+        1.7,
+        -4.4
+      ],
+      "yaw": 1.5707963267948966,
+      "pitch": -0.1,
+      "fov": 1.3089969389957472,
+      "pointCount": 107775
+    }
+  ],
+  "features": [
+    {
+      "name": "floor",
+      "kind": "surface",
+      "pointCount": 62500,
+      "idStart": 1,
+      "idEnd": 62500,
+      "notes": "4 cm floor"
+    },
+    {
+      "name": "wall",
+      "kind": "surface",
+      "pointCount": 48951,
+      "idStart": 62501,
+      "idEnd": 111451,
+      "notes": "3 cm back wall"
+    },
+    {
+      "name": "sphere",
+      "kind": "surface",
+      "pointCount": 25447,
+      "idStart": 111452,
+      "idEnd": 136898,
+      "notes": "2 cm sphere"
+    },
+    {
+      "name": "rods",
+      "kind": "rod",
+      "pointCount": 13134,
+      "idStart": 136899,
+      "idEnd": 150032,
+      "notes": "thin rods at 1.2 cm"
+    },
+    {
+      "name": "density-cliff",
+      "kind": "density",
+      "pointCount": 17689,
+      "idStart": 150033,
+      "idEnd": 167721,
+      "notes": "1.8 cm patch next to 4 cm floor"
+    },
+    {
+      "name": "clutter",
+      "kind": "noise",
+      "pointCount": 20000,
+      "idStart": 167722,
+      "idEnd": 187721,
+      "notes": "foliage cluster"
+    }
+  ],
+  "surfaces": [
+    {
+      "kind": "plane",
+      "name": "floor",
+      "origin": [
+        0,
+        -1,
+        0
+      ],
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "half": [
+        5,
+        5
+      ],
+      "spacing": 0.04
+    },
+    {
+      "kind": "sphere",
+      "name": "sphere",
+      "center": [
+        -1.4,
+        0.2,
+        -1.2
+      ],
+      "radius": 0.9,
+      "spacing": 0.02
+    },
+    {
+      "kind": "rod",
+      "name": "rod-a",
+      "a": [
+        1.6,
+        -1,
+        -0.6
+      ],
+      "b": [
+        2.6,
+        1.9,
+        -1.2
+      ],
+      "radius": 0.025,
+      "spacing": 0.012
+    }
+  ],
+  "home": {
+    "eye": [
+      7.5,
+      4.6,
+      7.5
+    ],
+    "target": [
+      0,
+      0.2,
+      0
+    ],
+    "fov": 55
+  },
+  "defaultBudget": 240000,
+  "notes": "Synthetic deterministic scan; analytic surfaces allow attribute validation."
+}

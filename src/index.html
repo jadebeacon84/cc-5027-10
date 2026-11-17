@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scan Stream — point cloud LOD viewer</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div class="brand-text">
+          <h1>Scan Stream</h1>
+          <p>Out-of-core scan point-cloud viewer</p>
+        </div>
+      </div>
+
+      <div class="dataset-picker">
+        <label for="dataset">Dataset</label>
+        <select id="dataset" aria-label="Dataset"></select>
+        <span id="dataset-meta" class="dataset-meta"></span>
+      </div>
+
+      <div class="topbar-actions">
+        <button id="btn-home" type="button" title="Home view (H)">Home</button>
+        <button id="btn-fit" type="button" title="Fit dataset (F)">Fit</button>
+        <button id="btn-cancel" type="button" title="Cancel all in-flight loads">Cancel loads</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="viewport" id="viewport">
+        <canvas id="gl" aria-label="3D scan point cloud viewport"></canvas>
+
+        <div class="viewport-overlay top-left">
+          <div class="hud" id="hud">
+            <div class="hud-row"><span>Points drawn</span><b id="hud-points">0</b></div>
+            <div class="hud-row"><span>Budget</span><b id="hud-budget">0</b></div>
+            <div class="hud-row"><span>Resident</span><b id="hud-resident">0 B</b></div>
+            <div class="hud-row"><span>In flight</span><b id="hud-inflight">0 B</b></div>
+            <div class="hud-row"><span>Nodes drawn</span><b id="hud-nodes">0</b></div>
+            <div class="hud-row"><span>Camera distance</span><b id="hud-cam">0</b></div>
+          </div>
+          <div class="hud small" id="status-hud">
+            <div class="hud-row"><span>FPS</span><b id="hud-fps">—</b></div>
+            <div class="hud-row"><span>Frame</span><b id="hud-frame">—</b></div>
+            <div class="hud-row"><span>SSE tolerance</span><b id="hud-sse">—</b></div>
+          </div>
+        </div>
+
+        <div class="viewport-overlay top-right">
+          <div class="panel compact" id="legend-panel">
+            <div class="legend-title">Display</div>
+            <div class="segmented" id="display-modes" role="group" aria-label="Display mode">
+              <button data-mode="colour" class="active" type="button">Colour</button>
+              <button data-mode="intensity" type="button">Intensity</button>
+              <button data-mode="scan" type="button">Stations</button>
+              <button data-mode="normal" type="button">Normals</button>
+              <button data-mode="lod" type="button">LOD</button>
+            </div>
+            <div class="legend" id="legend"></div>
+          </div>
+        </div>
+
+        <div class="viewport-overlay bottom-left" id="hover-panel">
+          <div class="panel compact" id="hover-info">
+            <div class="legend-title">Point inspector</div>
+            <p class="muted" id="hover-empty">Move the cursor over the cloud; click to pin a point.</p>
+            <dl class="kv" id="hover-fields"></dl>
+          </div>
+        </div>
+
+        <div class="viewport-overlay bottom-right">
+          <div class="panel compact" id="unrefined-panel">
+            <div class="legend-title">Unrefined regions</div>
+            <p class="muted" id="unrefined-summary">—</p>
+            <button id="btn-focus-unrefined" type="button" disabled>Focus worst region</button>
+          </div>
+        </div>
+
+        <div class="loading-bar" id="loading-bar"><div id="loading-fill"></div></div>
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      </section>
+
+      <aside class="sidebar">
+        <section class="panel">
+          <h2>Streaming budget</h2>
+          <label class="slider">
+            <span>Point budget <b id="point-budget-label">—</b></span>
+            <input id="point-budget" type="range" min="10000" max="8000000" step="10000" />
+          </label>
+          <label class="slider">
+            <span>Screen error tolerance (px) <b id="sse-label">—</b></span>
+            <input id="sse" type="range" min="0.25" max="32" step="0.25" />
+          </label>
+          <label class="slider">
+            <span>Byte budget <b id="byte-budget-label">—</b></span>
+            <input id="byte-budget" type="range" min="8" max="2048" step="8" />
+          </label>
+          <div class="row">
+            <label class="check"><input id="auto-budget" type="checkbox" /> Auto-manage budgets</label>
+          </div>
+          <div class="metrics" id="budget-metrics"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Detail controls</h2>
+          <label class="slider">
+            <span>Point size <b id="size-label">1.4</b></span>
+            <input id="point-size" type="range" min="0.6" max="6" step="0.1" value="1.4" />
+          </label>
+          <label class="slider">
+            <span>Brightness <b id="bright-label">1.00</b></span>
+            <input id="brightness" type="range" min="0.4" max="2" step="0.05" value="1" />
+          </label>
+          <label class="slider">
+            <span>Force depth (diagnostic) <b id="depth-label">auto</b></span>
+            <input id="force-depth" type="range" min="-1" max="12" step="1" value="-1" />
+          </label>
+          <div class="row">
+            <label class="check"><input id="show-unrefined" type="checkbox" /> Highlight unrefined regions</label>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>LOD state</h2>
+          <div class="metrics" id="lod-metrics"></div>
+          <div class="depth-chart" id="depth-chart" aria-label="Points by hierarchy depth"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Fixed trajectory</h2>
+          <p class="muted">Scripted zoom + orbit. Records load volume, resident points and frame time per waypoint.</p>
+          <div class="row">
+            <button id="btn-run-traj" type="button" class="primary">Run trajectory</button>
+            <button id="btn-export-traj" type="button" disabled>Export JSON</button>
+          </div>
+          <label class="slider">
+            <span>Latency injection <b id="latency-label">0 ms</b></span>
+            <input id="latency" type="range" min="0" max="400" step="10" value="0" />
+          </label>
+          <div class="traj-status" id="traj-status">Idle</div>
+          <div class="metrics" id="traj-metrics"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Failure feedback</h2>
+          <p class="muted">Inject a payload failure to confirm the kernel keeps coarse coverage and reports it here.</p>
+          <div class="row">
+            <button id="btn-fail" type="button">Fail next load</button>
+            <button id="btn-reload" type="button">Reload dataset</button>
+          </div>
+          <div class="metrics" id="failure-metrics"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Coverage probe</h2>
+          <p class="muted">Ray-casts a grid through the current view and reports which sampled rays land on drawn points.</p>
+          <div class="row">
+            <button id="btn-coverage" type="button">Run coverage probe</button>
+          </div>
+          <div class="metrics" id="coverage-metrics"></div>
+        </section>
+      </aside>
+    </main>
+
+    <footer class="statusbar">
+      <span id="status-text">Ready</span>
+      <span id="status-errors"></span>
+      <span class="spacer"></span>
+      <span id="status-selection"></span>
+    </footer>
+  </div>
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>

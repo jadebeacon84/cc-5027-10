@@ -1,0 +1,38 @@
+{
+  "storePoints": 187721,
+  "payloadPoints": 187721,
+  "depthHistogram": [
+    4000,
+    26328,
+    90601,
+    66677,
+    115,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "nodeCountByDepth": [
+    1,
+    8,
+    39,
+    102,
+    8,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "maxPayload": 4000,
+  "avgPayload": 1188.107594936709,
+  "maxDepthReached": 4,
+  "buildMs": 255
+}

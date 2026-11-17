@@ -1,25 +1,11 @@
-# solo-manager GitHub sync ignores
 node_modules/
-vendor/
 dist/
-build/
-.next/
-.nuxt/
-.output/
-coverage/
-.turbo/
-.cache/
-.parcel-cache/
+reports/*.png
 .vite/
-target/
-.gradle/
-.venv/
-venv/
-__pycache__/
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.DS_Store
 *.log
+
+# Local workstation files and environment overrides
+.DS_Store
 .env
-.env.*
+.env.local
+.env.*.local

@@ -1,0 +1,89 @@
+{
+  "dataset": "cliff",
+  "ok": true,
+  "checks": [
+    {
+      "name": "C6 payload headers",
+      "ok": true,
+      "detail": "all 2267 payloads valid (magic, version, layout, offsets, checksums)",
+      "metrics": {
+        "payloads": 2267,
+        "errors": 0
+      }
+    },
+    {
+      "name": "C1 point identity",
+      "ok": true,
+      "detail": "2843198 unique ids across 2267 payloads",
+      "metrics": {
+        "uniqueIds": 2843198,
+        "duplicates": 0
+      }
+    },
+    {
+      "name": "C3 node bounds",
+      "ok": true,
+      "detail": "pointsOutsideBounds=0, childBoundsNested=true",
+      "metrics": {
+        "pointsOutsideBounds": 0,
+        "nested": 1
+      }
+    },
+    {
+      "name": "C2 stable attributes",
+      "ok": true,
+      "detail": "attributeMismatches=0, missingIds=0",
+      "metrics": {
+        "attributeMismatches": 0,
+        "missingIds": 0
+      }
+    },
+    {
+      "name": "C5 payload capacity",
+      "ok": true,
+      "detail": "maxPayload=4000 (capacity 4000), nodesOverCapacity=0",
+      "metrics": {
+        "maxPayload": 4000,
+        "capacity": 4000,
+        "overCapacity": 0
+      }
+    },
+    {
+      "name": "C4 partition replay",
+      "ok": true,
+      "detail": "replayed 2843198 points, subtreeCountMismatches=0, orphanPoints=0",
+      "metrics": {
+        "replayed": 2843198,
+        "subtreeMismatches": 0,
+        "orphanPoints": 0
+      }
+    },
+    {
+      "name": "C4b ancestor-closed cuts",
+      "ok": true,
+      "detail": "1120 chain steps, duplicatesAcrossCuts=0",
+      "metrics": {
+        "chainSteps": 1120,
+        "failures": 0
+      }
+    },
+    {
+      "name": "C7 density monotonicity",
+      "ok": true,
+      "detail": "130 sampling steps, decreases=0",
+      "metrics": {
+        "tests": 130,
+        "failures": 0
+      }
+    }
+  ],
+  "nodesChecked": 2267,
+  "pointsChecked": 2843198,
+  "duplicateIds": 0,
+  "missingIds": 0,
+  "attributeMismatches": 0,
+  "boundsViolations": 0,
+  "maxPayload": 4000,
+  "totalBytes": 102572760,
+  "generatedAt": "2026-11-17T02:06:16.708Z"
+}

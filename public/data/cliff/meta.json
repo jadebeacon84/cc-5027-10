@@ -1,0 +1,218 @@
+{
+  "dataset": "cliff",
+  "title": "Cliff terrace — density cliff, suspended lattice, cables",
+  "generator": "scripts/generators.ts",
+  "description": "synthetic cliff scan, 2843198 points, 4 stations",
+  "seed": 20261117,
+  "worldBounds": {
+    "min": [
+      -11.792,
+      -6.168,
+      -10.668
+    ],
+    "max": [
+      22.668,
+      8.168,
+      14.26
+    ]
+  },
+  "totalPoints": 2843198,
+  "scanCount": 4,
+  "stations": [
+    {
+      "id": 0,
+      "position": [
+        14,
+        3.2,
+        1.5
+      ],
+      "yaw": -3.0348569809406576,
+      "pitch": -0.1,
+      "fov": 1.3089969389957472,
+      "pointCount": 613448
+    },
+    {
+      "id": 1,
+      "position": [
+        11,
+        5.6,
+        1.4
+      ],
+      "yaw": -3.015000526309821,
+      "pitch": -0.1,
+      "fov": 1.3089969389957472,
+      "pointCount": 11
+    },
+    {
+      "id": 2,
+      "position": [
+        11.5,
+        7.8,
+        1.5
+      ],
+      "yaw": -3.011890116433881,
+      "pitch": -0.1,
+      "fov": 1.3089969389957472,
+      "pointCount": 0
+    },
+    {
+      "id": 3,
+      "position": [
+        9,
+        3,
+        1.6
+      ],
+      "yaw": -2.9656530281372655,
+      "pitch": -0.1,
+      "fov": 1.3089969389957472,
+      "pointCount": 2229739
+    }
+  ],
+  "features": [
+    {
+      "name": "ground-fine",
+      "kind": "terrain",
+      "pointCount": 1102101,
+      "idStart": 1,
+      "idEnd": 1102101,
+      "notes": "2 cm ground, x < 12"
+    },
+    {
+      "name": "ground-coarse",
+      "kind": "terrain",
+      "pointCount": 7938,
+      "idStart": 1102102,
+      "idEnd": 1110039,
+      "notes": "16 cm ground, x > 12"
+    },
+    {
+      "name": "cliff-face",
+      "kind": "edge",
+      "pointCount": 363624,
+      "idStart": 1110040,
+      "idEnd": 1473663,
+      "notes": "vertical 6 m cliff at x = 12"
+    },
+    {
+      "name": "terrace",
+      "kind": "surface",
+      "pointCount": 222111,
+      "idStart": 1473664,
+      "idEnd": 1695774,
+      "notes": "raised terrace 3 cm"
+    },
+    {
+      "name": "lattice-spheres",
+      "kind": "surface",
+      "pointCount": 526895,
+      "idStart": 1695775,
+      "idEnd": 2222669,
+      "notes": "suspended lattice of spheres"
+    },
+    {
+      "name": "lattice-rods",
+      "kind": "rod",
+      "pointCount": 334529,
+      "idStart": 2222670,
+      "idEnd": 2557198,
+      "notes": "lattice struts and cables"
+    },
+    {
+      "name": "dense-canopy",
+      "kind": "density",
+      "pointCount": 260000,
+      "idStart": 2557199,
+      "idEnd": 2817198,
+      "notes": "bush canopies at 0.8 cm equivalent"
+    },
+    {
+      "name": "scan-shadow",
+      "kind": "density",
+      "pointCount": 26000,
+      "idStart": 2817199,
+      "idEnd": 2843198,
+      "notes": "occluded wedge left by a single station"
+    }
+  ],
+  "surfaces": [
+    {
+      "kind": "plane",
+      "name": "terrace",
+      "origin": [
+        17,
+        1.0109065524076686,
+        0
+      ],
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "half": [
+        5,
+        10
+      ],
+      "spacing": 0.03
+    },
+    {
+      "kind": "sphere",
+      "name": "lattice-sphere-0",
+      "center": [
+        -8,
+        3.2,
+        -7.8
+      ],
+      "radius": 0.32,
+      "spacing": 0.011
+    },
+    {
+      "kind": "rod",
+      "name": "lattice-cable",
+      "a": [
+        -8,
+        3.2,
+        -7.8
+      ],
+      "b": [
+        -8,
+        -0.5,
+        -7.8
+      ],
+      "radius": 0.009,
+      "spacing": 0.009
+    },
+    {
+      "kind": "lattice",
+      "name": "lattice",
+      "count": 49,
+      "bounds": {
+        "min": [
+          -8.5,
+          2,
+          -8.3
+        ],
+        "max": [
+          8,
+          4.5,
+          8
+        ]
+      },
+      "spacing": 0.011
+    }
+  ],
+  "home": {
+    "eye": [
+      25.5,
+      12.5,
+      21
+    ],
+    "target": [
+      6,
+      0.5,
+      0
+    ],
+    "fov": 55
+  },
+  "defaultBudget": 1200000,
+  "notes": "Synthetic deterministic scan; analytic surfaces allow attribute validation."
+}

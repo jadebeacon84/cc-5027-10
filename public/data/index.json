@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-11-17T01:52:23.967Z",
+  "datasets": {
+    "small": {
+      "totalPoints": 187721,
+      "nodeCount": 158,
+      "payloadNodeCount": 158,
+      "maxDepth": 4,
+      "bytes": 6773124,
+      "title": "Small mixed scan — fast validation dataset"
+    },
+    "assembly": {
+      "totalPoints": 1609165,
+      "nodeCount": 1201,
+      "payloadNodeCount": 1201,
+      "maxDepth": 5,
+      "bytes": 58045236,
+      "title": "Assembly hall — analytic surfaces, rods, density cliff"
+    },
+    "cliff": {
+      "totalPoints": 2843198,
+      "nodeCount": 2267,
+      "payloadNodeCount": 2267,
+      "maxDepth": 6,
+      "bytes": 102572760,
+      "title": "Cliff terrace — density cliff, suspended lattice, cables"
+    }
+  }
+}

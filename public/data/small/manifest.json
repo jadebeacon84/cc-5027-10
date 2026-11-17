@@ -1,0 +1,4798 @@
+{
+  "format": "pc-octree",
+  "version": 5,
+  "dataset": "small",
+  "title": "Small mixed scan — fast validation dataset",
+  "generator": "scripts/generators.ts",
+  "bounds": {
+    "min": [
+      -5.261,
+      -2.806,
+      -6.685
+    ],
+    "max": [
+      7.323,
+      3.899,
+      5.261
+    ]
+  },
+  "totalPoints": 187721,
+  "nodeCount": 158,
+  "payloadNodeCount": 158,
+  "maxDepth": 4,
+  "finestSpacing": 0.010885554497494569,
+  "root": "0",
+  "childOrder": "octant bits x=1,y=2,z=4",
+  "maxNodeBytes": 144096,
+  "nodeCapacity": 4000,
+  "nodes": [
+    {
+      "id": "0",
+      "path": "0",
+      "depth": 0,
+      "children": [
+        "0/0",
+        "0/1",
+        "0/2",
+        "0/3",
+        "0/4",
+        "0/5",
+        "0/6",
+        "0/7"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 187721,
+      "bounds": {
+        "min": [
+          -5.261,
+          -2.806,
+          -6.685
+        ],
+        "max": [
+          7.3229999999999995,
+          3.899,
+          5.261
+        ]
+      },
+      "spacing": 0.0751741898970725,
+      "geometricError": 0.0751741898970725,
+      "subtreeMinSpacing": 0.010885554497494569,
+      "bytes": 144096,
+      "hash": "c12df6ea7568e917",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.021308218046995276
+    },
+    {
+      "id": "0/0",
+      "path": "0/0",
+      "depth": 1,
+      "children": [
+        "0/0/1",
+        "0/0/2",
+        "0/0/3",
+        "0/0/5",
+        "0/0/6",
+        "0/0/7"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 39152,
+      "bounds": {
+        "min": [
+          -5.261,
+          -2.806,
+          -6.685
+        ],
+        "max": [
+          1.0309999999999997,
+          0.5465,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.03901798667637211,
+      "geometricError": 0.03901798667637211,
+      "subtreeMinSpacing": 0.01619406087542044,
+      "bytes": 144096,
+      "hash": "8c9f20c6deb6926a",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.1021659174499387
+    },
+    {
+      "id": "0/0/1",
+      "path": "0/0/1",
+      "depth": 2,
+      "children": [],
+      "pointCount": 2,
+      "subtreePointCount": 2,
+      "bounds": {
+        "min": [
+          -2.115,
+          -2.806,
+          -6.685
+        ],
+        "max": [
+          1.0309999999999997,
+          -1.12975,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.26216666666666666,
+      "geometricError": 0.26216666666666666,
+      "subtreeMinSpacing": 0.26216666666666666,
+      "bytes": 168,
+      "hash": "5c695f2172d720c8",
+      "payloadOffset": 0,
+      "payloadLength": 168,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/2",
+      "path": "0/0/2",
+      "depth": 2,
+      "children": [
+        "0/0/2/4",
+        "0/0/2/5",
+        "0/0/2/6",
+        "0/0/2/7"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 6400,
+      "bounds": {
+        "min": [
+          -5.261,
+          -1.12975,
+          -6.685
+        ],
+        "max": [
+          -2.115,
+          0.5465,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.024372707154493474,
+      "geometricError": 0.024372707154493474,
+      "subtreeMinSpacing": 0.024372707154493474,
+      "bytes": 144096,
+      "hash": "ce1d403bdddba6c9",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.625
+    },
+    {
+      "id": "0/0/2/4",
+      "path": "0/0/2/4",
+      "depth": 3,
+      "children": [],
+      "pointCount": 685,
+      "subtreePointCount": 685,
+      "bounds": {
+        "min": [
+          -5.261,
+          -1.12975,
+          -5.19175
+        ],
+        "max": [
+          -3.688,
+          -0.2916249999999998,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.031039928200755518,
+      "geometricError": 0.031039928200755518,
+      "subtreeMinSpacing": 0.031039928200755518,
+      "bytes": 24756,
+      "hash": "e9ab906e48387b4f",
+      "payloadOffset": 0,
+      "payloadLength": 24756,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/2/5",
+      "path": "0/0/2/5",
+      "depth": 3,
+      "children": [],
+      "pointCount": 809,
+      "subtreePointCount": 809,
+      "bounds": {
+        "min": [
+          -3.688,
+          -1.12975,
+          -5.19175
+        ],
+        "max": [
+          -2.115,
+          -0.2916249999999998,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.03128999503722878,
+      "geometricError": 0.03128999503722878,
+      "subtreeMinSpacing": 0.03128999503722878,
+      "bytes": 29220,
+      "hash": "666b1ef00eac321a",
+      "payloadOffset": 0,
+      "payloadLength": 29220,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/2/6",
+      "path": "0/0/2/6",
+      "depth": 3,
+      "children": [],
+      "pointCount": 416,
+      "subtreePointCount": 416,
+      "bounds": {
+        "min": [
+          -5.261,
+          -0.2916249999999998,
+          -5.19175
+        ],
+        "max": [
+          -3.688,
+          0.5465,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.028119551216429683,
+      "geometricError": 0.028119551216429683,
+      "subtreeMinSpacing": 0.028119551216429683,
+      "bytes": 15072,
+      "hash": "1b651a0fb72d20f9",
+      "payloadOffset": 0,
+      "payloadLength": 15072,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/2/7",
+      "path": "0/0/2/7",
+      "depth": 3,
+      "children": [],
+      "pointCount": 490,
+      "subtreePointCount": 490,
+      "bounds": {
+        "min": [
+          -3.688,
+          -0.2916249999999998,
+          -5.19175
+        ],
+        "max": [
+          -2.115,
+          0.5465,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.02806635293448731,
+      "geometricError": 0.02806635293448731,
+      "subtreeMinSpacing": 0.02806635293448731,
+      "bytes": 17736,
+      "hash": "b2ff0d2c91d3cecd",
+      "payloadOffset": 0,
+      "payloadLength": 17736,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/3",
+      "path": "0/0/3",
+      "depth": 2,
+      "children": [
+        "0/0/3/1",
+        "0/0/3/3",
+        "0/0/3/4",
+        "0/0/3/5",
+        "0/0/3/6",
+        "0/0/3/7"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 7091,
+      "bounds": {
+        "min": [
+          -2.115,
+          -1.12975,
+          -6.685
+        ],
+        "max": [
+          1.0309999999999997,
+          0.5465,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.02625357300417168,
+      "geometricError": 0.02625357300417168,
+      "subtreeMinSpacing": 0.025889795108977823,
+      "bytes": 144096,
+      "hash": "a6bc08ddccefc8f4",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.5640953321111268
+    },
+    {
+      "id": "0/0/3/1",
+      "path": "0/0/3/1",
+      "depth": 3,
+      "children": [],
+      "pointCount": 1,
+      "subtreePointCount": 1,
+      "bounds": {
+        "min": [
+          -0.5420000000000007,
+          -1.12975,
+          -6.685
+        ],
+        "max": [
+          1.0309999999999997,
+          -0.2916249999999998,
+          -5.19175
+        ]
+      },
+      "spacing": 0.13108333333333336,
+      "geometricError": 0.13108333333333336,
+      "subtreeMinSpacing": 0.13108333333333336,
+      "bytes": 132,
+      "hash": "e9d31c7f8c7ba528",
+      "payloadOffset": 0,
+      "payloadLength": 132,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/3/3",
+      "path": "0/0/3/3",
+      "depth": 3,
+      "children": [],
+      "pointCount": 2,
+      "subtreePointCount": 2,
+      "bounds": {
+        "min": [
+          -0.5420000000000007,
+          -0.2916249999999998,
+          -6.685
+        ],
+        "max": [
+          1.0309999999999997,
+          0.5465,
+          -5.19175
+        ]
+      },
+      "spacing": 0.13108333333333336,
+      "geometricError": 0.13108333333333336,
+      "subtreeMinSpacing": 0.13108333333333336,
+      "bytes": 168,
+      "hash": "ba19b42a1107ecf1",
+      "payloadOffset": 0,
+      "payloadLength": 168,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/3/4",
+      "path": "0/0/3/4",
+      "depth": 3,
+      "children": [],
+      "pointCount": 975,
+      "subtreePointCount": 975,
+      "bounds": {
+        "min": [
+          -2.115,
+          -1.12975,
+          -5.19175
+        ],
+        "max": [
+          -0.5420000000000007,
+          -0.2916249999999998,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.026911759834918753,
+      "geometricError": 0.026911759834918753,
+      "subtreeMinSpacing": 0.026911759834918753,
+      "bytes": 35196,
+      "hash": "d1826533b4aabc69",
+      "payloadOffset": 0,
+      "payloadLength": 35196,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/3/5",
+      "path": "0/0/3/5",
+      "depth": 3,
+      "children": [],
+      "pointCount": 943,
+      "subtreePointCount": 943,
+      "bounds": {
+        "min": [
+          -0.5420000000000007,
+          -1.12975,
+          -5.19175
+        ],
+        "max": [
+          1.0309999999999997,
+          -0.2916249999999998,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.027906264654819237,
+      "geometricError": 0.027906264654819237,
+      "subtreeMinSpacing": 0.027906264654819237,
+      "bytes": 34044,
+      "hash": "bc6160ba4043e0a4",
+      "payloadOffset": 0,
+      "payloadLength": 34044,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/3/6",
+      "path": "0/0/3/6",
+      "depth": 3,
+      "children": [],
+      "pointCount": 562,
+      "subtreePointCount": 562,
+      "bounds": {
+        "min": [
+          -2.115,
+          -0.2916249999999998,
+          -5.19175
+        ],
+        "max": [
+          -0.5420000000000007,
+          0.5465,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.025889795108977823,
+      "geometricError": 0.025889795108977823,
+      "subtreeMinSpacing": 0.025889795108977823,
+      "bytes": 20328,
+      "hash": "873df938e57d0825",
+      "payloadOffset": 0,
+      "payloadLength": 20328,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/3/7",
+      "path": "0/0/3/7",
+      "depth": 3,
+      "children": [],
+      "pointCount": 608,
+      "subtreePointCount": 608,
+      "bounds": {
+        "min": [
+          -0.5420000000000007,
+          -0.2916249999999998,
+          -5.19175
+        ],
+        "max": [
+          1.0309999999999997,
+          0.5465,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.027135301179304055,
+      "geometricError": 0.027135301179304055,
+      "subtreeMinSpacing": 0.027135301179304055,
+      "bytes": 21984,
+      "hash": "ab66565b8ebb8bdf",
+      "payloadOffset": 0,
+      "payloadLength": 21984,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/5",
+      "path": "0/0/5",
+      "depth": 2,
+      "children": [],
+      "pointCount": 6,
+      "subtreePointCount": 6,
+      "bounds": {
+        "min": [
+          -2.115,
+          -2.806,
+          -3.6984999999999997
+        ],
+        "max": [
+          1.0309999999999997,
+          -1.12975,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.26216666666666666,
+      "geometricError": 0.26216666666666666,
+      "subtreeMinSpacing": 0.26216666666666666,
+      "bytes": 312,
+      "hash": "54e5e9db8705aa44",
+      "payloadOffset": 0,
+      "payloadLength": 312,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/6",
+      "path": "0/0/6",
+      "depth": 2,
+      "children": [
+        "0/0/6/0",
+        "0/0/6/1",
+        "0/0/6/4",
+        "0/0/6/5",
+        "0/0/6/7"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 6645,
+      "bounds": {
+        "min": [
+          -5.261,
+          -1.12975,
+          -3.6984999999999997
+        ],
+        "max": [
+          -2.115,
+          0.5465,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.023215240717771535,
+      "geometricError": 0.023215240717771535,
+      "subtreeMinSpacing": 0.019203774301049907,
+      "bytes": 144096,
+      "hash": "b47190706d91a145",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.6019563581640331
+    },
+    {
+      "id": "0/0/6/0",
+      "path": "0/0/6/0",
+      "depth": 3,
+      "children": [],
+      "pointCount": 440,
+      "subtreePointCount": 440,
+      "bounds": {
+        "min": [
+          -5.261,
+          -1.12975,
+          -3.6984999999999997
+        ],
+        "max": [
+          -3.688,
+          -0.2916249999999998,
+          -2.2052499999999995
+        ]
+      },
+      "spacing": 0.03552895737855436,
+      "geometricError": 0.03552895737855436,
+      "subtreeMinSpacing": 0.03552895737855436,
+      "bytes": 15936,
+      "hash": "b8783ad42bb1be0c",
+      "payloadOffset": 0,
+      "payloadLength": 15936,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/6/1",
+      "path": "0/0/6/1",
+      "depth": 3,
+      "children": [],
+      "pointCount": 505,
+      "subtreePointCount": 505,
+      "bounds": {
+        "min": [
+          -3.688,
+          -1.12975,
+          -3.6984999999999997
+        ],
+        "max": [
+          -2.115,
+          -0.2916249999999998,
+          -2.2052499999999995
+        ]
+      },
+      "spacing": 0.03749071005260355,
+      "geometricError": 0.03749071005260355,
+      "subtreeMinSpacing": 0.03749071005260355,
+      "bytes": 18276,
+      "hash": "347bf3f6b21d15ac",
+      "payloadOffset": 0,
+      "payloadLength": 18276,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/6/4",
+      "path": "0/0/6/4",
+      "depth": 3,
+      "children": [],
+      "pointCount": 427,
+      "subtreePointCount": 427,
+      "bounds": {
+        "min": [
+          -5.261,
+          -1.12975,
+          -2.2052499999999995
+        ],
+        "max": [
+          -3.688,
+          -0.2916249999999998,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.03639753602389819,
+      "geometricError": 0.03639753602389819,
+      "subtreeMinSpacing": 0.03639753602389819,
+      "bytes": 15468,
+      "hash": "92e04846b8d79b61",
+      "payloadOffset": 0,
+      "payloadLength": 15468,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/6/5",
+      "path": "0/0/6/5",
+      "depth": 3,
+      "children": [],
+      "pointCount": 515,
+      "subtreePointCount": 515,
+      "bounds": {
+        "min": [
+          -3.688,
+          -1.12975,
+          -2.2052499999999995
+        ],
+        "max": [
+          -2.115,
+          -0.2916249999999998,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.036546539604549254,
+      "geometricError": 0.036546539604549254,
+      "subtreeMinSpacing": 0.036546539604549254,
+      "bytes": 18636,
+      "hash": "94a528478005b51c",
+      "payloadOffset": 0,
+      "payloadLength": 18636,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/6/7",
+      "path": "0/0/6/7",
+      "depth": 3,
+      "children": [],
+      "pointCount": 758,
+      "subtreePointCount": 758,
+      "bounds": {
+        "min": [
+          -3.688,
+          -0.2916249999999998,
+          -2.2052499999999995
+        ],
+        "max": [
+          -2.115,
+          0.5465,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.019203774301049907,
+      "geometricError": 0.019203774301049907,
+      "subtreeMinSpacing": 0.019203774301049907,
+      "bytes": 27384,
+      "hash": "8bc7c2fbc8e43fbc",
+      "payloadOffset": 0,
+      "payloadLength": 27384,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/7",
+      "path": "0/0/7",
+      "depth": 2,
+      "children": [
+        "0/0/7/0",
+        "0/0/7/1",
+        "0/0/7/2",
+        "0/0/7/3",
+        "0/0/7/4",
+        "0/0/7/5",
+        "0/0/7/6",
+        "0/0/7/7"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 15008,
+      "bounds": {
+        "min": [
+          -2.115,
+          -1.12975,
+          -3.6984999999999997
+        ],
+        "max": [
+          1.0309999999999997,
+          0.5465,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.024906027009972943,
+      "geometricError": 0.024906027009972943,
+      "subtreeMinSpacing": 0.01619406087542044,
+      "bytes": 144096,
+      "hash": "e25d59569189a412",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.26652452025586354
+    },
+    {
+      "id": "0/0/7/0",
+      "path": "0/0/7/0",
+      "depth": 3,
+      "children": [],
+      "pointCount": 947,
+      "subtreePointCount": 947,
+      "bounds": {
+        "min": [
+          -2.115,
+          -1.12975,
+          -3.6984999999999997
+        ],
+        "max": [
+          -0.5420000000000007,
+          -0.2916249999999998,
+          -2.2052499999999995
+        ]
+      },
+      "spacing": 0.028834764052102255,
+      "geometricError": 0.028834764052102255,
+      "subtreeMinSpacing": 0.028834764052102255,
+      "bytes": 34188,
+      "hash": "051ae9898e67cff9",
+      "payloadOffset": 0,
+      "payloadLength": 34188,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/7/1",
+      "path": "0/0/7/1",
+      "depth": 3,
+      "children": [],
+      "pointCount": 989,
+      "subtreePointCount": 989,
+      "bounds": {
+        "min": [
+          -0.5420000000000007,
+          -1.12975,
+          -3.6984999999999997
+        ],
+        "max": [
+          1.0309999999999997,
+          -0.2916249999999998,
+          -2.2052499999999995
+        ]
+      },
+      "spacing": 0.02840374400422457,
+      "geometricError": 0.02840374400422457,
+      "subtreeMinSpacing": 0.02840374400422457,
+      "bytes": 35700,
+      "hash": "b1bd8dbf5e6e97dd",
+      "payloadOffset": 0,
+      "payloadLength": 35700,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/7/2",
+      "path": "0/0/7/2",
+      "depth": 3,
+      "children": [],
+      "pointCount": 1,
+      "subtreePointCount": 1,
+      "bounds": {
+        "min": [
+          -2.115,
+          -0.2916249999999998,
+          -3.6984999999999997
+        ],
+        "max": [
+          -0.5420000000000007,
+          0.5465,
+          -2.2052499999999995
+        ]
+      },
+      "spacing": 0.1310833333333333,
+      "geometricError": 0.1310833333333333,
+      "subtreeMinSpacing": 0.1310833333333333,
+      "bytes": 132,
+      "hash": "65eab0a361383016",
+      "payloadOffset": 0,
+      "payloadLength": 132,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/7/3",
+      "path": "0/0/7/3",
+      "depth": 3,
+      "children": [],
+      "pointCount": 51,
+      "subtreePointCount": 51,
+      "bounds": {
+        "min": [
+          -0.5420000000000007,
+          -0.2916249999999998,
+          -3.6984999999999997
+        ],
+        "max": [
+          1.0309999999999997,
+          0.5465,
+          -2.2052499999999995
+        ]
+      },
+      "spacing": 0.16626363827784213,
+      "geometricError": 0.16626363827784213,
+      "subtreeMinSpacing": 0.16626363827784213,
+      "bytes": 1932,
+      "hash": "7d177c861f7d539e",
+      "payloadOffset": 0,
+      "payloadLength": 1932,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/7/4",
+      "path": "0/0/7/4",
+      "depth": 3,
+      "children": [
+        "0/0/7/4/0",
+        "0/0/7/4/1",
+        "0/0/7/4/2",
+        "0/0/7/4/3",
+        "0/0/7/4/4",
+        "0/0/7/4/5",
+        "0/0/7/4/6",
+        "0/0/7/4/7"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 4115,
+      "bounds": {
+        "min": [
+          -2.115,
+          -1.12975,
+          -2.2052499999999995
+        ],
+        "max": [
+          -0.5420000000000007,
+          -0.2916249999999998,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.01711180420486755,
+      "geometricError": 0.01711180420486755,
+      "subtreeMinSpacing": 0.01711180420486755,
+      "bytes": 144096,
+      "hash": "3837fe2a0bed2b39",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.9720534629404617
+    },
+    {
+      "id": "0/0/7/4/0",
+      "path": "0/0/7/4/0",
+      "depth": 4,
+      "children": [],
+      "pointCount": 6,
+      "subtreePointCount": 6,
+      "bounds": {
+        "min": [
+          -2.115,
+          -1.12975,
+          -2.2052499999999995
+        ],
+        "max": [
+          -1.3285,
+          -0.7106875000000001,
+          -1.4586249999999996
+        ]
+      },
+      "spacing": 0.06554166666666668,
+      "geometricError": 0.06554166666666668,
+      "subtreeMinSpacing": 0.06554166666666668,
+      "bytes": 312,
+      "hash": "9a68e035a9cc0f76",
+      "payloadOffset": 0,
+      "payloadLength": 312,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/7/4/1",
+      "path": "0/0/7/4/1",
+      "depth": 4,
+      "children": [],
+      "pointCount": 4,
+      "subtreePointCount": 4,
+      "bounds": {
+        "min": [
+          -1.3285,
+          -1.12975,
+          -2.2052499999999995
+        ],
+        "max": [
+          -0.5420000000000007,
+          -0.7106875000000001,
+          -1.4586249999999996
+        ]
+      },
+      "spacing": 0.06554166666666661,
+      "geometricError": 0.06554166666666661,
+      "subtreeMinSpacing": 0.06554166666666661,
+      "bytes": 240,
+      "hash": "55542b5d4914ecd3",
+      "payloadOffset": 0,
+      "payloadLength": 240,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/7/4/2",
+      "path": "0/0/7/4/2",
+      "depth": 4,
+      "children": [],
+      "pointCount": 18,
+      "subtreePointCount": 18,
+      "bounds": {
+        "min": [
+          -2.115,
+          -0.7106875000000001,
+          -2.2052499999999995
+        ],
+        "max": [
+          -1.3285,
+          -0.2916249999999998,
+          -1.4586249999999996
+        ]
+      },
+      "spacing": 0.08066029823244221,
+      "geometricError": 0.08066029823244221,
+      "subtreeMinSpacing": 0.08066029823244221,
+      "bytes": 744,
+      "hash": "32399c68f8f20676",
+      "payloadOffset": 0,
+      "payloadLength": 744,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/7/4/3",
+      "path": "0/0/7/4/3",
+      "depth": 4,
+      "children": [],
+      "pointCount": 13,
+      "subtreePointCount": 13,
+      "bounds": {
+        "min": [
+          -1.3285,
+          -0.7106875000000001,
+          -2.2052499999999995
+        ],
+        "max": [
+          -0.5420000000000007,
+          -0.2916249999999998,
+          -1.4586249999999996
+        ]
+      },
+      "spacing": 0.09204148129161813,
+      "geometricError": 0.09204148129161813,
+      "subtreeMinSpacing": 0.09204148129161813,
+      "bytes": 564,
+      "hash": "01575061a8ededc8",
+      "payloadOffset": 0,
+      "payloadLength": 564,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/7/4/4",
+      "path": "0/0/7/4/4",
+      "depth": 4,
+      "children": [],
+      "pointCount": 4,
+      "subtreePointCount": 4,
+      "bounds": {
+        "min": [
+          -2.115,
+          -1.12975,
+          -1.4586249999999996
+        ],
+        "max": [
+          -1.3285,
+          -0.7106875000000001,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.06554166666666668,
+      "geometricError": 0.06554166666666668,
+      "subtreeMinSpacing": 0.06554166666666668,
+      "bytes": 240,
+      "hash": "1c77ab4ae2911a4c",
+      "payloadOffset": 0,
+      "payloadLength": 240,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/7/4/5",
+      "path": "0/0/7/4/5",
+      "depth": 4,
+      "children": [],
+      "pointCount": 7,
+      "subtreePointCount": 7,
+      "bounds": {
+        "min": [
+          -1.3285,
+          -1.12975,
+          -1.4586249999999996
+        ],
+        "max": [
+          -0.5420000000000007,
+          -0.7106875000000001,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.06554166666666661,
+      "geometricError": 0.06554166666666661,
+      "subtreeMinSpacing": 0.06554166666666661,
+      "bytes": 348,
+      "hash": "dda6cfb87ef54373",
+      "payloadOffset": 0,
+      "payloadLength": 348,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/7/4/6",
+      "path": "0/0/7/4/6",
+      "depth": 4,
+      "children": [],
+      "pointCount": 34,
+      "subtreePointCount": 34,
+      "bounds": {
+        "min": [
+          -2.115,
+          -0.7106875000000001,
+          -1.4586249999999996
+        ],
+        "max": [
+          -1.3285,
+          -0.2916249999999998,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.060481114503429155,
+      "geometricError": 0.060481114503429155,
+      "subtreeMinSpacing": 0.060481114503429155,
+      "bytes": 1320,
+      "hash": "9b8ce65a0994901d",
+      "payloadOffset": 0,
+      "payloadLength": 1320,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/7/4/7",
+      "path": "0/0/7/4/7",
+      "depth": 4,
+      "children": [],
+      "pointCount": 29,
+      "subtreePointCount": 29,
+      "bounds": {
+        "min": [
+          -1.3285,
+          -0.7106875000000001,
+          -1.4586249999999996
+        ],
+        "max": [
+          -0.5420000000000007,
+          -0.2916249999999998,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.07411861596991394,
+      "geometricError": 0.07411861596991394,
+      "subtreeMinSpacing": 0.07411861596991394,
+      "bytes": 1140,
+      "hash": "e5e67d835445d104",
+      "payloadOffset": 0,
+      "payloadLength": 1140,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/7/5",
+      "path": "0/0/7/5",
+      "depth": 3,
+      "children": [],
+      "pointCount": 961,
+      "subtreePointCount": 961,
+      "bounds": {
+        "min": [
+          -0.5420000000000007,
+          -1.12975,
+          -2.2052499999999995
+        ],
+        "max": [
+          1.0309999999999997,
+          -0.2916249999999998,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.027882140957440356,
+      "geometricError": 0.027882140957440356,
+      "subtreeMinSpacing": 0.027882140957440356,
+      "bytes": 34692,
+      "hash": "ad1ee3eff96c3ec3",
+      "payloadOffset": 0,
+      "payloadLength": 34692,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/7/6",
+      "path": "0/0/7/6",
+      "depth": 3,
+      "children": [],
+      "pointCount": 3531,
+      "subtreePointCount": 3531,
+      "bounds": {
+        "min": [
+          -2.115,
+          -0.2916249999999998,
+          -2.2052499999999995
+        ],
+        "max": [
+          -0.5420000000000007,
+          0.5465,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.01619406087542044,
+      "geometricError": 0.01619406087542044,
+      "subtreeMinSpacing": 0.01619406087542044,
+      "bytes": 127212,
+      "hash": "7ce519c7b2518265",
+      "payloadOffset": 0,
+      "payloadLength": 127212,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/0/7/7",
+      "path": "0/0/7/7",
+      "depth": 3,
+      "children": [],
+      "pointCount": 413,
+      "subtreePointCount": 413,
+      "bounds": {
+        "min": [
+          -0.5420000000000007,
+          -0.2916249999999998,
+          -2.2052499999999995
+        ],
+        "max": [
+          1.0309999999999997,
+          0.5465,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.01644409204840346,
+      "geometricError": 0.01644409204840346,
+      "subtreeMinSpacing": 0.01644409204840346,
+      "bytes": 14964,
+      "hash": "107950745366d7c1",
+      "payloadOffset": 0,
+      "payloadLength": 14964,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1",
+      "path": "0/1",
+      "depth": 1,
+      "children": [
+        "0/1/0",
+        "0/1/1",
+        "0/1/2",
+        "0/1/3",
+        "0/1/4",
+        "0/1/5",
+        "0/1/6",
+        "0/1/7"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 28953,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -2.806,
+          -6.685
+        ],
+        "max": [
+          7.3229999999999995,
+          0.5465,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.048935176056614356,
+      "geometricError": 0.048935176056614356,
+      "subtreeMinSpacing": 0.011936114812192838,
+      "bytes": 144096,
+      "hash": "9e46efeb0fd9e3ed",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.13815494076606916
+    },
+    {
+      "id": "0/1/0",
+      "path": "0/1/0",
+      "depth": 2,
+      "children": [],
+      "pointCount": 92,
+      "subtreePointCount": 92,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -2.806,
+          -6.685
+        ],
+        "max": [
+          4.176999999999999,
+          -1.12975,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.15801051896332485,
+      "geometricError": 0.15801051896332485,
+      "subtreeMinSpacing": 0.15801051896332485,
+      "bytes": 3408,
+      "hash": "0bb13c5662881616",
+      "payloadOffset": 0,
+      "payloadLength": 3408,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/1",
+      "path": "0/1/1",
+      "depth": 2,
+      "children": [],
+      "pointCount": 19,
+      "subtreePointCount": 19,
+      "bounds": {
+        "min": [
+          4.176999999999999,
+          -2.806,
+          -6.685
+        ],
+        "max": [
+          7.3229999999999995,
+          -1.12975,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.2256938956057417,
+      "geometricError": 0.2256938956057417,
+      "subtreeMinSpacing": 0.2256938956057417,
+      "bytes": 780,
+      "hash": "e04d784309d5f75b",
+      "payloadOffset": 0,
+      "payloadLength": 780,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/2",
+      "path": "0/1/2",
+      "depth": 2,
+      "children": [
+        "0/1/2/0",
+        "0/1/2/1",
+        "0/1/2/2",
+        "0/1/2/3",
+        "0/1/2/4",
+        "0/1/2/5",
+        "0/1/2/6",
+        "0/1/2/7"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 8395,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -1.12975,
+          -6.685
+        ],
+        "max": [
+          4.176999999999999,
+          0.5465,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.029290596449843016,
+      "geometricError": 0.029290596449843016,
+      "subtreeMinSpacing": 0.02510897367028863,
+      "bytes": 144096,
+      "hash": "d0980befd6dd5763",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.47647409172126265
+    },
+    {
+      "id": "0/1/2/0",
+      "path": "0/1/2/0",
+      "depth": 3,
+      "children": [],
+      "pointCount": 4,
+      "subtreePointCount": 4,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -1.12975,
+          -6.685
+        ],
+        "max": [
+          2.604,
+          -0.2916249999999998,
+          -5.19175
+        ]
+      },
+      "spacing": 0.13108333333333336,
+      "geometricError": 0.13108333333333336,
+      "subtreeMinSpacing": 0.13108333333333336,
+      "bytes": 240,
+      "hash": "5933fdf4be72ab59",
+      "payloadOffset": 0,
+      "payloadLength": 240,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/2/1",
+      "path": "0/1/2/1",
+      "depth": 3,
+      "children": [],
+      "pointCount": 8,
+      "subtreePointCount": 8,
+      "bounds": {
+        "min": [
+          2.604,
+          -1.12975,
+          -6.685
+        ],
+        "max": [
+          4.176999999999999,
+          -0.2916249999999998,
+          -5.19175
+        ]
+      },
+      "spacing": 0.25854855144224986,
+      "geometricError": 0.25854855144224986,
+      "subtreeMinSpacing": 0.25854855144224986,
+      "bytes": 384,
+      "hash": "fe4ebb3a2b8a0c72",
+      "payloadOffset": 0,
+      "payloadLength": 384,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/2/2",
+      "path": "0/1/2/2",
+      "depth": 3,
+      "children": [],
+      "pointCount": 8,
+      "subtreePointCount": 8,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -0.2916249999999998,
+          -6.685
+        ],
+        "max": [
+          2.604,
+          0.5465,
+          -5.19175
+        ]
+      },
+      "spacing": 0.4110479971796461,
+      "geometricError": 0.4110479971796461,
+      "subtreeMinSpacing": 0.4110479971796461,
+      "bytes": 384,
+      "hash": "328ef156c4171b6e",
+      "payloadOffset": 0,
+      "payloadLength": 384,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/2/3",
+      "path": "0/1/2/3",
+      "depth": 3,
+      "children": [],
+      "pointCount": 21,
+      "subtreePointCount": 21,
+      "bounds": {
+        "min": [
+          2.604,
+          -0.2916249999999998,
+          -6.685
+        ],
+        "max": [
+          4.176999999999999,
+          0.5465,
+          -5.19175
+        ]
+      },
+      "spacing": 0.16896200103563366,
+      "geometricError": 0.16896200103563366,
+      "subtreeMinSpacing": 0.16896200103563366,
+      "bytes": 852,
+      "hash": "b230a521d5ff8f20",
+      "payloadOffset": 0,
+      "payloadLength": 852,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/2/4",
+      "path": "0/1/2/4",
+      "depth": 3,
+      "children": [],
+      "pointCount": 1217,
+      "subtreePointCount": 1217,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -1.12975,
+          -5.19175
+        ],
+        "max": [
+          2.604,
+          -0.2916249999999998,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.02947183988007203,
+      "geometricError": 0.02947183988007203,
+      "subtreeMinSpacing": 0.02947183988007203,
+      "bytes": 43908,
+      "hash": "7e297d4c0a03e12a",
+      "payloadOffset": 0,
+      "payloadLength": 43908,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/2/5",
+      "path": "0/1/2/5",
+      "depth": 3,
+      "children": [],
+      "pointCount": 1233,
+      "subtreePointCount": 1233,
+      "bounds": {
+        "min": [
+          2.604,
+          -1.12975,
+          -5.19175
+        ],
+        "max": [
+          4.176999999999999,
+          -0.2916249999999998,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.029005041831915948,
+      "geometricError": 0.029005041831915948,
+      "subtreeMinSpacing": 0.029005041831915948,
+      "bytes": 44484,
+      "hash": "e8a45a32fb1a27be",
+      "payloadOffset": 0,
+      "payloadLength": 44484,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/2/6",
+      "path": "0/1/2/6",
+      "depth": 3,
+      "children": [],
+      "pointCount": 846,
+      "subtreePointCount": 846,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -0.2916249999999998,
+          -5.19175
+        ],
+        "max": [
+          2.604,
+          0.5465,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.02510897367028863,
+      "geometricError": 0.02510897367028863,
+      "subtreeMinSpacing": 0.02510897367028863,
+      "bytes": 30552,
+      "hash": "3f968b0dddb584dc",
+      "payloadOffset": 0,
+      "payloadLength": 30552,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/2/7",
+      "path": "0/1/2/7",
+      "depth": 3,
+      "children": [],
+      "pointCount": 1058,
+      "subtreePointCount": 1058,
+      "bounds": {
+        "min": [
+          2.604,
+          -0.2916249999999998,
+          -5.19175
+        ],
+        "max": [
+          4.176999999999999,
+          0.5465,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.026821685675395928,
+      "geometricError": 0.026821685675395928,
+      "subtreeMinSpacing": 0.026821685675395928,
+      "bytes": 38184,
+      "hash": "832644bc38df900e",
+      "payloadOffset": 0,
+      "payloadLength": 38184,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/3",
+      "path": "0/1/3",
+      "depth": 2,
+      "children": [],
+      "pointCount": 2196,
+      "subtreePointCount": 2196,
+      "bounds": {
+        "min": [
+          4.176999999999999,
+          -1.12975,
+          -6.685
+        ],
+        "max": [
+          7.3229999999999995,
+          0.5465,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.022287678235260035,
+      "geometricError": 0.022287678235260035,
+      "subtreeMinSpacing": 0.022287678235260035,
+      "bytes": 79152,
+      "hash": "c2f107469146d933",
+      "payloadOffset": 0,
+      "payloadLength": 79152,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/4",
+      "path": "0/1/4",
+      "depth": 2,
+      "children": [],
+      "pointCount": 296,
+      "subtreePointCount": 296,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -2.806,
+          -3.6984999999999997
+        ],
+        "max": [
+          4.176999999999999,
+          -1.12975,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.12605938328887958,
+      "geometricError": 0.12605938328887958,
+      "subtreeMinSpacing": 0.12605938328887958,
+      "bytes": 10752,
+      "hash": "9f406be29d25af0b",
+      "payloadOffset": 0,
+      "payloadLength": 10752,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/5",
+      "path": "0/1/5",
+      "depth": 2,
+      "children": [],
+      "pointCount": 68,
+      "subtreePointCount": 68,
+      "bounds": {
+        "min": [
+          4.176999999999999,
+          -2.806,
+          -3.6984999999999997
+        ],
+        "max": [
+          7.3229999999999995,
+          -1.12975,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.19320210644887045,
+      "geometricError": 0.19320210644887045,
+      "subtreeMinSpacing": 0.19320210644887045,
+      "bytes": 2544,
+      "hash": "502af2f4c3f813d0",
+      "payloadOffset": 0,
+      "payloadLength": 2544,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/6",
+      "path": "0/1/6",
+      "depth": 2,
+      "children": [
+        "0/1/6/0",
+        "0/1/6/1",
+        "0/1/6/2",
+        "0/1/6/3",
+        "0/1/6/4",
+        "0/1/6/5",
+        "0/1/6/6",
+        "0/1/6/7"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 11393,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -1.12975,
+          -3.6984999999999997
+        ],
+        "max": [
+          4.176999999999999,
+          0.5465,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.04220958874901302,
+      "geometricError": 0.04220958874901302,
+      "subtreeMinSpacing": 0.011936114812192838,
+      "bytes": 144096,
+      "hash": "f7aa3397757cbd73",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.35109277626612834
+    },
+    {
+      "id": "0/1/6/0",
+      "path": "0/1/6/0",
+      "depth": 3,
+      "children": [],
+      "pointCount": 1069,
+      "subtreePointCount": 1069,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -1.12975,
+          -3.6984999999999997
+        ],
+        "max": [
+          2.604,
+          -0.2916249999999998,
+          -2.2052499999999995
+        ]
+      },
+      "spacing": 0.031177475809595588,
+      "geometricError": 0.031177475809595588,
+      "subtreeMinSpacing": 0.031177475809595588,
+      "bytes": 38580,
+      "hash": "19961265f4b8fb80",
+      "payloadOffset": 0,
+      "payloadLength": 38580,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/6/1",
+      "path": "0/1/6/1",
+      "depth": 3,
+      "children": [],
+      "pointCount": 1283,
+      "subtreePointCount": 1283,
+      "bounds": {
+        "min": [
+          2.604,
+          -1.12975,
+          -3.6984999999999997
+        ],
+        "max": [
+          4.176999999999999,
+          -0.2916249999999998,
+          -2.2052499999999995
+        ]
+      },
+      "spacing": 0.03609096432663117,
+      "geometricError": 0.03609096432663117,
+      "subtreeMinSpacing": 0.03609096432663117,
+      "bytes": 46284,
+      "hash": "062bddaa1c0417a7",
+      "payloadOffset": 0,
+      "payloadLength": 46284,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/6/2",
+      "path": "0/1/6/2",
+      "depth": 3,
+      "children": [],
+      "pointCount": 607,
+      "subtreePointCount": 607,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -0.2916249999999998,
+          -3.6984999999999997
+        ],
+        "max": [
+          2.604,
+          0.5465,
+          -2.2052499999999995
+        ]
+      },
+      "spacing": 0.07057671088817893,
+      "geometricError": 0.07057671088817893,
+      "subtreeMinSpacing": 0.07057671088817893,
+      "bytes": 21948,
+      "hash": "2e120c7acba7835c",
+      "payloadOffset": 0,
+      "payloadLength": 21948,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/6/3",
+      "path": "0/1/6/3",
+      "depth": 3,
+      "children": [],
+      "pointCount": 1181,
+      "subtreePointCount": 1181,
+      "bounds": {
+        "min": [
+          2.604,
+          -0.2916249999999998,
+          -3.6984999999999997
+        ],
+        "max": [
+          4.176999999999999,
+          0.5465,
+          -2.2052499999999995
+        ]
+      },
+      "spacing": 0.05474615459003634,
+      "geometricError": 0.05474615459003634,
+      "subtreeMinSpacing": 0.05474615459003634,
+      "bytes": 42612,
+      "hash": "8d0b3b39ec8b96f8",
+      "payloadOffset": 0,
+      "payloadLength": 42612,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/6/4",
+      "path": "0/1/6/4",
+      "depth": 3,
+      "children": [],
+      "pointCount": 1012,
+      "subtreePointCount": 1012,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -1.12975,
+          -2.2052499999999995
+        ],
+        "max": [
+          2.604,
+          -0.2916249999999998,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.025621407912129683,
+      "geometricError": 0.025621407912129683,
+      "subtreeMinSpacing": 0.025621407912129683,
+      "bytes": 36528,
+      "hash": "b161c04e77ab11b0",
+      "payloadOffset": 0,
+      "payloadLength": 36528,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/6/5",
+      "path": "0/1/6/5",
+      "depth": 3,
+      "children": [],
+      "pointCount": 996,
+      "subtreePointCount": 996,
+      "bounds": {
+        "min": [
+          2.604,
+          -1.12975,
+          -2.2052499999999995
+        ],
+        "max": [
+          4.176999999999999,
+          -0.2916249999999998,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.03045577540772344,
+      "geometricError": 0.03045577540772344,
+      "subtreeMinSpacing": 0.03045577540772344,
+      "bytes": 35952,
+      "hash": "44fb5deca3290428",
+      "payloadOffset": 0,
+      "payloadLength": 35952,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/6/6",
+      "path": "0/1/6/6",
+      "depth": 3,
+      "children": [],
+      "pointCount": 784,
+      "subtreePointCount": 784,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -0.2916249999999998,
+          -2.2052499999999995
+        ],
+        "max": [
+          2.604,
+          0.5465,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.011936114812192838,
+      "geometricError": 0.011936114812192838,
+      "subtreeMinSpacing": 0.011936114812192838,
+      "bytes": 28320,
+      "hash": "a59eb515ffa06ce2",
+      "payloadOffset": 0,
+      "payloadLength": 28320,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/6/7",
+      "path": "0/1/6/7",
+      "depth": 3,
+      "children": [],
+      "pointCount": 461,
+      "subtreePointCount": 461,
+      "bounds": {
+        "min": [
+          2.604,
+          -0.2916249999999998,
+          -2.2052499999999995
+        ],
+        "max": [
+          4.176999999999999,
+          0.5465,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.07362467341159762,
+      "geometricError": 0.07362467341159762,
+      "subtreeMinSpacing": 0.07362467341159762,
+      "bytes": 16692,
+      "hash": "f5c45a614db80e8d",
+      "payloadOffset": 0,
+      "payloadLength": 16692,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/1/7",
+      "path": "0/1/7",
+      "depth": 2,
+      "children": [],
+      "pointCount": 2494,
+      "subtreePointCount": 2494,
+      "bounds": {
+        "min": [
+          4.176999999999999,
+          -1.12975,
+          -3.6984999999999997
+        ],
+        "max": [
+          7.3229999999999995,
+          0.5465,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.0355420489672295,
+      "geometricError": 0.0355420489672295,
+      "subtreeMinSpacing": 0.0355420489672295,
+      "bytes": 89880,
+      "hash": "f4399fa8ff8aeb72",
+      "payloadOffset": 0,
+      "payloadLength": 89880,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/2",
+      "path": "0/2",
+      "depth": 1,
+      "children": [
+        "0/2/0",
+        "0/2/1",
+        "0/2/2",
+        "0/2/3",
+        "0/2/4",
+        "0/2/5",
+        "0/2/7"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 29695,
+      "bounds": {
+        "min": [
+          -5.261,
+          0.5465,
+          -6.685
+        ],
+        "max": [
+          1.0309999999999997,
+          3.899,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.027475554170527494,
+      "geometricError": 0.027475554170527494,
+      "subtreeMinSpacing": 0.010885554497494569,
+      "bytes": 144096,
+      "hash": "f9af6dc94ee5f149",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.13470281192119885
+    },
+    {
+      "id": "0/2/0",
+      "path": "0/2/0",
+      "depth": 2,
+      "children": [
+        "0/2/0/4",
+        "0/2/0/5",
+        "0/2/0/6",
+        "0/2/0/7"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 6274,
+      "bounds": {
+        "min": [
+          -5.261,
+          0.5465,
+          -6.685
+        ],
+        "max": [
+          -2.115,
+          2.2227500000000004,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.013415908832204173,
+      "geometricError": 0.013415908832204173,
+      "subtreeMinSpacing": 0.011280730022392679,
+      "bytes": 144096,
+      "hash": "daba6c9141299eca",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.637551801083838
+    },
+    {
+      "id": "0/2/0/4",
+      "path": "0/2/0/4",
+      "depth": 3,
+      "children": [],
+      "pointCount": 413,
+      "subtreePointCount": 413,
+      "bounds": {
+        "min": [
+          -5.261,
+          0.5465,
+          -5.19175
+        ],
+        "max": [
+          -3.688,
+          1.3846249999999998,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.02847983284952208,
+      "geometricError": 0.02847983284952208,
+      "subtreeMinSpacing": 0.02847983284952208,
+      "bytes": 14964,
+      "hash": "c4210dd822824c41",
+      "payloadOffset": 0,
+      "payloadLength": 14964,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/2/0/5",
+      "path": "0/2/0/5",
+      "depth": 3,
+      "children": [],
+      "pointCount": 419,
+      "subtreePointCount": 419,
+      "bounds": {
+        "min": [
+          -3.688,
+          0.5465,
+          -5.19175
+        ],
+        "max": [
+          -2.115,
+          1.3846249999999998,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.028524235221522632,
+      "geometricError": 0.028524235221522632,
+      "subtreeMinSpacing": 0.028524235221522632,
+      "bytes": 15180,
+      "hash": "e779465b3c7c75ec",
+      "payloadOffset": 0,
+      "payloadLength": 15180,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/2/0/6",
+      "path": "0/2/0/6",
+      "depth": 3,
+      "children": [],
+      "pointCount": 598,
+      "subtreePointCount": 598,
+      "bounds": {
+        "min": [
+          -5.261,
+          1.3846249999999998,
+          -5.19175
+        ],
+        "max": [
+          -3.688,
+          2.2227500000000004,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.014234955832271383,
+      "geometricError": 0.014234955832271383,
+      "subtreeMinSpacing": 0.014234955832271383,
+      "bytes": 21624,
+      "hash": "83bb65aa670f2761",
+      "payloadOffset": 0,
+      "payloadLength": 21624,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/2/0/7",
+      "path": "0/2/0/7",
+      "depth": 3,
+      "children": [],
+      "pointCount": 844,
+      "subtreePointCount": 844,
+      "bounds": {
+        "min": [
+          -3.688,
+          1.3846249999999998,
+          -5.19175
+        ],
+        "max": [
+          -2.115,
+          2.2227500000000004,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.011280730022392679,
+      "geometricError": 0.011280730022392679,
+      "subtreeMinSpacing": 0.011280730022392679,
+      "bytes": 30480,
+      "hash": "f77821dae20b75b9",
+      "payloadOffset": 0,
+      "payloadLength": 30480,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/2/1",
+      "path": "0/2/1",
+      "depth": 2,
+      "children": [
+        "0/2/1/1",
+        "0/2/1/4",
+        "0/2/1/5",
+        "0/2/1/6",
+        "0/2/1/7"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 7123,
+      "bounds": {
+        "min": [
+          -2.115,
+          0.5465,
+          -6.685
+        ],
+        "max": [
+          1.0309999999999997,
+          2.2227500000000004,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.012810413909443515,
+      "geometricError": 0.012810413909443515,
+      "subtreeMinSpacing": 0.010885554497494569,
+      "bytes": 144096,
+      "hash": "3de2f4f2427282a7",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.5615611399691142
+    },
+    {
+      "id": "0/2/1/1",
+      "path": "0/2/1/1",
+      "depth": 3,
+      "children": [],
+      "pointCount": 1,
+      "subtreePointCount": 1,
+      "bounds": {
+        "min": [
+          -0.5420000000000007,
+          0.5465,
+          -6.685
+        ],
+        "max": [
+          1.0309999999999997,
+          1.3846249999999998,
+          -5.19175
+        ]
+      },
+      "spacing": 0.13108333333333336,
+      "geometricError": 0.13108333333333336,
+      "subtreeMinSpacing": 0.13108333333333336,
+      "bytes": 132,
+      "hash": "1dcd9ca31b736536",
+      "payloadOffset": 0,
+      "payloadLength": 132,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/2/1/4",
+      "path": "0/2/1/4",
+      "depth": 3,
+      "children": [],
+      "pointCount": 560,
+      "subtreePointCount": 560,
+      "bounds": {
+        "min": [
+          -2.115,
+          0.5465,
+          -5.19175
+        ],
+        "max": [
+          -0.5420000000000007,
+          1.3846249999999998,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.028176454350255495,
+      "geometricError": 0.028176454350255495,
+      "subtreeMinSpacing": 0.028176454350255495,
+      "bytes": 20256,
+      "hash": "e57509b0acd1a636",
+      "payloadOffset": 0,
+      "payloadLength": 20256,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/2/1/5",
+      "path": "0/2/1/5",
+      "depth": 3,
+      "children": [],
+      "pointCount": 551,
+      "subtreePointCount": 551,
+      "bounds": {
+        "min": [
+          -0.5420000000000007,
+          0.5465,
+          -5.19175
+        ],
+        "max": [
+          1.0309999999999997,
+          1.3846249999999998,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.02787269018275009,
+      "geometricError": 0.02787269018275009,
+      "subtreeMinSpacing": 0.02787269018275009,
+      "bytes": 19932,
+      "hash": "309c651101f39c12",
+      "payloadOffset": 0,
+      "payloadLength": 19932,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/2/1/6",
+      "path": "0/2/1/6",
+      "depth": 3,
+      "children": [],
+      "pointCount": 1033,
+      "subtreePointCount": 1033,
+      "bounds": {
+        "min": [
+          -2.115,
+          1.3846249999999998,
+          -5.19175
+        ],
+        "max": [
+          -0.5420000000000007,
+          2.2227500000000004,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.010885554497494569,
+      "geometricError": 0.010885554497494569,
+      "subtreeMinSpacing": 0.010885554497494569,
+      "bytes": 37284,
+      "hash": "f7d3dc7048465486",
+      "payloadOffset": 0,
+      "payloadLength": 37284,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/2/1/7",
+      "path": "0/2/1/7",
+      "depth": 3,
+      "children": [],
+      "pointCount": 978,
+      "subtreePointCount": 978,
+      "bounds": {
+        "min": [
+          -0.5420000000000007,
+          1.3846249999999998,
+          -5.19175
+        ],
+        "max": [
+          1.0309999999999997,
+          2.2227500000000004,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.010933071242638086,
+      "geometricError": 0.010933071242638086,
+      "subtreeMinSpacing": 0.010933071242638086,
+      "bytes": 35304,
+      "hash": "3a872351e5a462a4",
+      "payloadOffset": 0,
+      "payloadLength": 35304,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/2/2",
+      "path": "0/2/2",
+      "depth": 2,
+      "children": [],
+      "pointCount": 3211,
+      "subtreePointCount": 3211,
+      "bounds": {
+        "min": [
+          -5.261,
+          2.2227500000000004,
+          -6.685
+        ],
+        "max": [
+          -2.115,
+          3.899,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.01898586209279169,
+      "geometricError": 0.01898586209279169,
+      "subtreeMinSpacing": 0.01898586209279169,
+      "bytes": 115692,
+      "hash": "01edc04df5323b9a",
+      "payloadOffset": 0,
+      "payloadLength": 115692,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/2/3",
+      "path": "0/2/3",
+      "depth": 2,
+      "children": [],
+      "pointCount": 3460,
+      "subtreePointCount": 3460,
+      "bounds": {
+        "min": [
+          -2.115,
+          2.2227500000000004,
+          -6.685
+        ],
+        "max": [
+          1.0309999999999997,
+          3.899,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.019933213386978284,
+      "geometricError": 0.019933213386978284,
+      "subtreeMinSpacing": 0.019933213386978284,
+      "bytes": 124656,
+      "hash": "b5bbebfd8eab5cce",
+      "payloadOffset": 0,
+      "payloadLength": 124656,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/2/4",
+      "path": "0/2/4",
+      "depth": 2,
+      "children": [],
+      "pointCount": 295,
+      "subtreePointCount": 295,
+      "bounds": {
+        "min": [
+          -5.261,
+          0.5465,
+          -3.6984999999999997
+        ],
+        "max": [
+          -2.115,
+          2.2227500000000004,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.01577850285902641,
+      "geometricError": 0.01577850285902641,
+      "subtreeMinSpacing": 0.01577850285902641,
+      "bytes": 10716,
+      "hash": "12078ec39221106e",
+      "payloadOffset": 0,
+      "payloadLength": 10716,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/2/5",
+      "path": "0/2/5",
+      "depth": 2,
+      "children": [
+        "0/2/5/1",
+        "0/2/5/3",
+        "0/2/5/4",
+        "0/2/5/5",
+        "0/2/5/7"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 5326,
+      "bounds": {
+        "min": [
+          -2.115,
+          0.5465,
+          -3.6984999999999997
+        ],
+        "max": [
+          1.0309999999999997,
+          2.2227500000000004,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.016357303848225032,
+      "geometricError": 0.016357303848225032,
+      "subtreeMinSpacing": 0.016357303848225032,
+      "bytes": 144096,
+      "hash": "bc133f67f34624b2",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.7510326699211416
+    },
+    {
+      "id": "0/2/5/1",
+      "path": "0/2/5/1",
+      "depth": 3,
+      "children": [],
+      "pointCount": 21,
+      "subtreePointCount": 21,
+      "bounds": {
+        "min": [
+          -0.5420000000000007,
+          0.5465,
+          -3.6984999999999997
+        ],
+        "max": [
+          1.0309999999999997,
+          1.3846249999999998,
+          -2.2052499999999995
+        ]
+      },
+      "spacing": 0.2117660812393222,
+      "geometricError": 0.2117660812393222,
+      "subtreeMinSpacing": 0.2117660812393222,
+      "bytes": 852,
+      "hash": "f6e50296a1597f03",
+      "payloadOffset": 0,
+      "payloadLength": 852,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/2/5/3",
+      "path": "0/2/5/3",
+      "depth": 3,
+      "children": [],
+      "pointCount": 5,
+      "subtreePointCount": 5,
+      "bounds": {
+        "min": [
+          -0.5420000000000007,
+          1.3846249999999998,
+          -3.6984999999999997
+        ],
+        "max": [
+          1.0309999999999997,
+          2.2227500000000004,
+          -2.2052499999999995
+        ]
+      },
+      "spacing": 0.13108333333333336,
+      "geometricError": 0.13108333333333336,
+      "subtreeMinSpacing": 0.13108333333333336,
+      "bytes": 276,
+      "hash": "bd25b0e760c42a03",
+      "payloadOffset": 0,
+      "payloadLength": 276,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/2/5/4",
+      "path": "0/2/5/4",
+      "depth": 3,
+      "children": [],
+      "pointCount": 1288,
+      "subtreePointCount": 1288,
+      "bounds": {
+        "min": [
+          -2.115,
+          0.5465,
+          -2.2052499999999995
+        ],
+        "max": [
+          -0.5420000000000007,
+          1.3846249999999998,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.021172431328400382,
+      "geometricError": 0.021172431328400382,
+      "subtreeMinSpacing": 0.021172431328400382,
+      "bytes": 46464,
+      "hash": "1553c40509ef25aa",
+      "payloadOffset": 0,
+      "payloadLength": 46464,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/2/5/5",
+      "path": "0/2/5/5",
+      "depth": 3,
+      "children": [],
+      "pointCount": 9,
+      "subtreePointCount": 9,
+      "bounds": {
+        "min": [
+          -0.5420000000000007,
+          0.5465,
+          -2.2052499999999995
+        ],
+        "max": [
+          1.0309999999999997,
+          1.3846249999999998,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.3927966387705548,
+      "geometricError": 0.3927966387705548,
+      "subtreeMinSpacing": 0.3927966387705548,
+      "bytes": 420,
+      "hash": "37f4635727fe4158",
+      "payloadOffset": 0,
+      "payloadLength": 420,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/2/5/7",
+      "path": "0/2/5/7",
+      "depth": 3,
+      "children": [],
+      "pointCount": 3,
+      "subtreePointCount": 3,
+      "bounds": {
+        "min": [
+          -0.5420000000000007,
+          1.3846249999999998,
+          -2.2052499999999995
+        ],
+        "max": [
+          1.0309999999999997,
+          2.2227500000000004,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.13108333333333336,
+      "geometricError": 0.13108333333333336,
+      "subtreeMinSpacing": 0.13108333333333336,
+      "bytes": 204,
+      "hash": "a9ebd8241d2420dd",
+      "payloadOffset": 0,
+      "payloadLength": 204,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/2/7",
+      "path": "0/2/7",
+      "depth": 2,
+      "children": [],
+      "pointCount": 6,
+      "subtreePointCount": 6,
+      "bounds": {
+        "min": [
+          -2.115,
+          2.2227500000000004,
+          -3.6984999999999997
+        ],
+        "max": [
+          1.0309999999999997,
+          3.899,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.26216666666666666,
+      "geometricError": 0.26216666666666666,
+      "subtreeMinSpacing": 0.26216666666666666,
+      "bytes": 312,
+      "hash": "0461acbbcc676d4d",
+      "payloadOffset": 0,
+      "payloadLength": 312,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3",
+      "path": "0/3",
+      "depth": 1,
+      "children": [
+        "0/3/0",
+        "0/3/1",
+        "0/3/2",
+        "0/3/3",
+        "0/3/4",
+        "0/3/5",
+        "0/3/6",
+        "0/3/7"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 24938,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          0.5465,
+          -6.685
+        ],
+        "max": [
+          7.3229999999999995,
+          3.899,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.031457906722796525,
+      "geometricError": 0.031457906722796525,
+      "subtreeMinSpacing": 0.011054496339765062,
+      "bytes": 144096,
+      "hash": "e4d60ebefefe5954",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.16039778651054615
+    },
+    {
+      "id": "0/3/0",
+      "path": "0/3/0",
+      "depth": 2,
+      "children": [
+        "0/3/0/0",
+        "0/3/0/1",
+        "0/3/0/2",
+        "0/3/0/3",
+        "0/3/0/4",
+        "0/3/0/5",
+        "0/3/0/6",
+        "0/3/0/7"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 7391,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          0.5465,
+          -6.685
+        ],
+        "max": [
+          4.176999999999999,
+          2.2227500000000004,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.02219144164918973,
+      "geometricError": 0.02219144164918973,
+      "subtreeMinSpacing": 0.02003916271364622,
+      "bytes": 144096,
+      "hash": "e84888f53e8d3a52",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.541198755242863
+    },
+    {
+      "id": "0/3/0/0",
+      "path": "0/3/0/0",
+      "depth": 3,
+      "children": [],
+      "pointCount": 11,
+      "subtreePointCount": 11,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          0.5465,
+          -6.685
+        ],
+        "max": [
+          2.604,
+          1.3846249999999998,
+          -5.19175
+        ]
+      },
+      "spacing": 0.25648569401445986,
+      "geometricError": 0.25648569401445986,
+      "subtreeMinSpacing": 0.25648569401445986,
+      "bytes": 492,
+      "hash": "43d9b19ad37fe4ec",
+      "payloadOffset": 0,
+      "payloadLength": 492,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/0/1",
+      "path": "0/3/0/1",
+      "depth": 3,
+      "children": [],
+      "pointCount": 13,
+      "subtreePointCount": 13,
+      "bounds": {
+        "min": [
+          2.604,
+          0.5465,
+          -6.685
+        ],
+        "max": [
+          4.176999999999999,
+          1.3846249999999998,
+          -5.19175
+        ]
+      },
+      "spacing": 0.24239286163625157,
+      "geometricError": 0.24239286163625157,
+      "subtreeMinSpacing": 0.24239286163625157,
+      "bytes": 564,
+      "hash": "43ef26aed9b0edaf",
+      "payloadOffset": 0,
+      "payloadLength": 564,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/0/2",
+      "path": "0/3/0/2",
+      "depth": 3,
+      "children": [],
+      "pointCount": 3,
+      "subtreePointCount": 3,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          1.3846249999999998,
+          -6.685
+        ],
+        "max": [
+          2.604,
+          2.2227500000000004,
+          -5.19175
+        ]
+      },
+      "spacing": 0.13108333333333336,
+      "geometricError": 0.13108333333333336,
+      "subtreeMinSpacing": 0.13108333333333336,
+      "bytes": 204,
+      "hash": "0aa17f5dc89d211b",
+      "payloadOffset": 0,
+      "payloadLength": 204,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/0/3",
+      "path": "0/3/0/3",
+      "depth": 3,
+      "children": [],
+      "pointCount": 6,
+      "subtreePointCount": 6,
+      "bounds": {
+        "min": [
+          2.604,
+          1.3846249999999998,
+          -6.685
+        ],
+        "max": [
+          4.176999999999999,
+          2.2227500000000004,
+          -5.19175
+        ]
+      },
+      "spacing": 0.13108333333333322,
+      "geometricError": 0.13108333333333322,
+      "subtreeMinSpacing": 0.13108333333333322,
+      "bytes": 312,
+      "hash": "e58d697dc5e47cf2",
+      "payloadOffset": 0,
+      "payloadLength": 312,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/0/4",
+      "path": "0/3/0/4",
+      "depth": 3,
+      "children": [],
+      "pointCount": 706,
+      "subtreePointCount": 706,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          0.5465,
+          -5.19175
+        ],
+        "max": [
+          2.604,
+          1.3846249999999998,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.02919151960501786,
+      "geometricError": 0.02919151960501786,
+      "subtreeMinSpacing": 0.02919151960501786,
+      "bytes": 25512,
+      "hash": "a672f4689863fd41",
+      "payloadOffset": 0,
+      "payloadLength": 25512,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/0/5",
+      "path": "0/3/0/5",
+      "depth": 3,
+      "children": [],
+      "pointCount": 850,
+      "subtreePointCount": 850,
+      "bounds": {
+        "min": [
+          2.604,
+          0.5465,
+          -5.19175
+        ],
+        "max": [
+          4.176999999999999,
+          1.3846249999999998,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.029074442025224665,
+      "geometricError": 0.029074442025224665,
+      "subtreeMinSpacing": 0.029074442025224665,
+      "bytes": 30696,
+      "hash": "4320066cad5a2202",
+      "payloadOffset": 0,
+      "payloadLength": 30696,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/0/6",
+      "path": "0/3/0/6",
+      "depth": 3,
+      "children": [],
+      "pointCount": 1061,
+      "subtreePointCount": 1061,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          1.3846249999999998,
+          -5.19175
+        ],
+        "max": [
+          2.604,
+          2.2227500000000004,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.02003916271364622,
+      "geometricError": 0.02003916271364622,
+      "subtreeMinSpacing": 0.02003916271364622,
+      "bytes": 38292,
+      "hash": "82445603328ce8c4",
+      "payloadOffset": 0,
+      "payloadLength": 38292,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/0/7",
+      "path": "0/3/0/7",
+      "depth": 3,
+      "children": [],
+      "pointCount": 741,
+      "subtreePointCount": 741,
+      "bounds": {
+        "min": [
+          2.604,
+          1.3846249999999998,
+          -5.19175
+        ],
+        "max": [
+          4.176999999999999,
+          2.2227500000000004,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.026774099488390577,
+      "geometricError": 0.026774099488390577,
+      "subtreeMinSpacing": 0.026774099488390577,
+      "bytes": 26772,
+      "hash": "0d4bdf918d1928f2",
+      "payloadOffset": 0,
+      "payloadLength": 26772,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/1",
+      "path": "0/3/1",
+      "depth": 2,
+      "children": [],
+      "pointCount": 1589,
+      "subtreePointCount": 1589,
+      "bounds": {
+        "min": [
+          4.176999999999999,
+          0.5465,
+          -6.685
+        ],
+        "max": [
+          7.3229999999999995,
+          2.2227500000000004,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.021214036247888684,
+      "geometricError": 0.021214036247888684,
+      "subtreeMinSpacing": 0.021214036247888684,
+      "bytes": 57300,
+      "hash": "765d339df9cb9dd7",
+      "payloadOffset": 0,
+      "payloadLength": 57300,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/2",
+      "path": "0/3/2",
+      "depth": 2,
+      "children": [
+        "0/3/2/4",
+        "0/3/2/5",
+        "0/3/2/6",
+        "0/3/2/7"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 4316,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          2.2227500000000004,
+          -6.685
+        ],
+        "max": [
+          4.176999999999999,
+          3.899,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.015587104384858068,
+      "geometricError": 0.015587104384858068,
+      "subtreeMinSpacing": 0.015587104384858068,
+      "bytes": 144096,
+      "hash": "46412030e0f3edb4",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.9267840593141798
+    },
+    {
+      "id": "0/3/2/4",
+      "path": "0/3/2/4",
+      "depth": 3,
+      "children": [],
+      "pointCount": 91,
+      "subtreePointCount": 91,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          2.2227500000000004,
+          -5.19175
+        ],
+        "max": [
+          2.604,
+          3.0608750000000002,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.05634647355242246,
+      "geometricError": 0.05634647355242246,
+      "subtreeMinSpacing": 0.05634647355242246,
+      "bytes": 3372,
+      "hash": "873b5cfc0c8d3919",
+      "payloadOffset": 0,
+      "payloadLength": 3372,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/2/5",
+      "path": "0/3/2/5",
+      "depth": 3,
+      "children": [],
+      "pointCount": 156,
+      "subtreePointCount": 156,
+      "bounds": {
+        "min": [
+          2.604,
+          2.2227500000000004,
+          -5.19175
+        ],
+        "max": [
+          4.176999999999999,
+          3.0608750000000002,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.023492366001092457,
+      "geometricError": 0.023492366001092457,
+      "subtreeMinSpacing": 0.023492366001092457,
+      "bytes": 5712,
+      "hash": "1d7c4feac78a6fd6",
+      "payloadOffset": 0,
+      "payloadLength": 5712,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/2/6",
+      "path": "0/3/2/6",
+      "depth": 3,
+      "children": [],
+      "pointCount": 41,
+      "subtreePointCount": 41,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          3.0608750000000002,
+          -5.19175
+        ],
+        "max": [
+          2.604,
+          3.899,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.03685287054513491,
+      "geometricError": 0.03685287054513491,
+      "subtreeMinSpacing": 0.03685287054513491,
+      "bytes": 1572,
+      "hash": "05cad9d488fdb989",
+      "payloadOffset": 0,
+      "payloadLength": 1572,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/2/7",
+      "path": "0/3/2/7",
+      "depth": 3,
+      "children": [],
+      "pointCount": 28,
+      "subtreePointCount": 28,
+      "bounds": {
+        "min": [
+          2.604,
+          3.0608750000000002,
+          -5.19175
+        ],
+        "max": [
+          4.176999999999999,
+          3.899,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.05069723738765822,
+      "geometricError": 0.05069723738765822,
+      "subtreeMinSpacing": 0.05069723738765822,
+      "bytes": 1104,
+      "hash": "8c0f65ce1d5dcb9b",
+      "payloadOffset": 0,
+      "payloadLength": 1104,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/3",
+      "path": "0/3/3",
+      "depth": 2,
+      "children": [],
+      "pointCount": 1210,
+      "subtreePointCount": 1210,
+      "bounds": {
+        "min": [
+          4.176999999999999,
+          2.2227500000000004,
+          -6.685
+        ],
+        "max": [
+          7.3229999999999995,
+          3.899,
+          -3.6984999999999997
+        ]
+      },
+      "spacing": 0.011054496339765062,
+      "geometricError": 0.011054496339765062,
+      "subtreeMinSpacing": 0.011054496339765062,
+      "bytes": 43656,
+      "hash": "6e1018abf8d5d3a1",
+      "payloadOffset": 0,
+      "payloadLength": 43656,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/4",
+      "path": "0/3/4",
+      "depth": 2,
+      "children": [
+        "0/3/4/0",
+        "0/3/4/1",
+        "0/3/4/2",
+        "0/3/4/3",
+        "0/3/4/4",
+        "0/3/4/5",
+        "0/3/4/6",
+        "0/3/4/7"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 5322,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          0.5465,
+          -3.6984999999999997
+        ],
+        "max": [
+          4.176999999999999,
+          2.2227500000000004,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.023663394201723302,
+      "geometricError": 0.023663394201723302,
+      "subtreeMinSpacing": 0.01230577690536896,
+      "bytes": 144096,
+      "hash": "0de51421572277da",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.7515971439308531
+    },
+    {
+      "id": "0/3/4/0",
+      "path": "0/3/4/0",
+      "depth": 3,
+      "children": [],
+      "pointCount": 180,
+      "subtreePointCount": 180,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          0.5465,
+          -3.6984999999999997
+        ],
+        "max": [
+          2.604,
+          1.3846249999999998,
+          -2.2052499999999995
+        ]
+      },
+      "spacing": 0.1168962205505757,
+      "geometricError": 0.1168962205505757,
+      "subtreeMinSpacing": 0.1168962205505757,
+      "bytes": 6576,
+      "hash": "4d0d79ea9feacf7e",
+      "payloadOffset": 0,
+      "payloadLength": 6576,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/4/1",
+      "path": "0/3/4/1",
+      "depth": 3,
+      "children": [],
+      "pointCount": 365,
+      "subtreePointCount": 365,
+      "bounds": {
+        "min": [
+          2.604,
+          0.5465,
+          -3.6984999999999997
+        ],
+        "max": [
+          4.176999999999999,
+          1.3846249999999998,
+          -2.2052499999999995
+        ]
+      },
+      "spacing": 0.0900812162730229,
+      "geometricError": 0.0900812162730229,
+      "subtreeMinSpacing": 0.0900812162730229,
+      "bytes": 13236,
+      "hash": "c0e5e4204fe0ea9e",
+      "payloadOffset": 0,
+      "payloadLength": 13236,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/4/2",
+      "path": "0/3/4/2",
+      "depth": 3,
+      "children": [],
+      "pointCount": 47,
+      "subtreePointCount": 47,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          1.3846249999999998,
+          -3.6984999999999997
+        ],
+        "max": [
+          2.604,
+          2.2227500000000004,
+          -2.2052499999999995
+        ]
+      },
+      "spacing": 0.16823041073915282,
+      "geometricError": 0.16823041073915282,
+      "subtreeMinSpacing": 0.16823041073915282,
+      "bytes": 1788,
+      "hash": "1b79a68d1342ddb6",
+      "payloadOffset": 0,
+      "payloadLength": 1788,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/4/3",
+      "path": "0/3/4/3",
+      "depth": 3,
+      "children": [],
+      "pointCount": 124,
+      "subtreePointCount": 124,
+      "bounds": {
+        "min": [
+          2.604,
+          1.3846249999999998,
+          -3.6984999999999997
+        ],
+        "max": [
+          4.176999999999999,
+          2.2227500000000004,
+          -2.2052499999999995
+        ]
+      },
+      "spacing": 0.10752961469742134,
+      "geometricError": 0.10752961469742134,
+      "subtreeMinSpacing": 0.10752961469742134,
+      "bytes": 4560,
+      "hash": "b3e444a077f324d6",
+      "payloadOffset": 0,
+      "payloadLength": 4560,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/4/4",
+      "path": "0/3/4/4",
+      "depth": 3,
+      "children": [],
+      "pointCount": 266,
+      "subtreePointCount": 266,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          0.5465,
+          -2.2052499999999995
+        ],
+        "max": [
+          2.604,
+          1.3846249999999998,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.012757811083347502,
+      "geometricError": 0.012757811083347502,
+      "subtreeMinSpacing": 0.012757811083347502,
+      "bytes": 9672,
+      "hash": "827cff8c64eea441",
+      "payloadOffset": 0,
+      "payloadLength": 9672,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/4/5",
+      "path": "0/3/4/5",
+      "depth": 3,
+      "children": [],
+      "pointCount": 152,
+      "subtreePointCount": 152,
+      "bounds": {
+        "min": [
+          2.604,
+          0.5465,
+          -2.2052499999999995
+        ],
+        "max": [
+          4.176999999999999,
+          1.3846249999999998,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.12435673255436226,
+      "geometricError": 0.12435673255436226,
+      "subtreeMinSpacing": 0.12435673255436226,
+      "bytes": 5568,
+      "hash": "5c14e8992fd62cd3",
+      "payloadOffset": 0,
+      "payloadLength": 5568,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/4/6",
+      "path": "0/3/4/6",
+      "depth": 3,
+      "children": [],
+      "pointCount": 139,
+      "subtreePointCount": 139,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          1.3846249999999998,
+          -2.2052499999999995
+        ],
+        "max": [
+          2.604,
+          2.2227500000000004,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.01230577690536896,
+      "geometricError": 0.01230577690536896,
+      "subtreeMinSpacing": 0.01230577690536896,
+      "bytes": 5100,
+      "hash": "38ec5eeb02eb476f",
+      "payloadOffset": 0,
+      "payloadLength": 5100,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/4/7",
+      "path": "0/3/4/7",
+      "depth": 3,
+      "children": [],
+      "pointCount": 49,
+      "subtreePointCount": 49,
+      "bounds": {
+        "min": [
+          2.604,
+          1.3846249999999998,
+          -2.2052499999999995
+        ],
+        "max": [
+          4.176999999999999,
+          2.2227500000000004,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.1403055667422144,
+      "geometricError": 0.1403055667422144,
+      "subtreeMinSpacing": 0.1403055667422144,
+      "bytes": 1860,
+      "hash": "f07254af01c310bd",
+      "payloadOffset": 0,
+      "payloadLength": 1860,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/5",
+      "path": "0/3/5",
+      "depth": 2,
+      "children": [],
+      "pointCount": 975,
+      "subtreePointCount": 975,
+      "bounds": {
+        "min": [
+          4.176999999999999,
+          0.5465,
+          -3.6984999999999997
+        ],
+        "max": [
+          7.3229999999999995,
+          2.2227500000000004,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.0760119967332891,
+      "geometricError": 0.0760119967332891,
+      "subtreeMinSpacing": 0.0760119967332891,
+      "bytes": 35196,
+      "hash": "f9302b69121595e2",
+      "payloadOffset": 0,
+      "payloadLength": 35196,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/6",
+      "path": "0/3/6",
+      "depth": 2,
+      "children": [],
+      "pointCount": 104,
+      "subtreePointCount": 104,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          2.2227500000000004,
+          -3.6984999999999997
+        ],
+        "max": [
+          4.176999999999999,
+          3.899,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.18301711582069155,
+      "geometricError": 0.18301711582069155,
+      "subtreeMinSpacing": 0.18301711582069155,
+      "bytes": 3840,
+      "hash": "2814bae43683732e",
+      "payloadOffset": 0,
+      "payloadLength": 3840,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/3/7",
+      "path": "0/3/7",
+      "depth": 2,
+      "children": [],
+      "pointCount": 31,
+      "subtreePointCount": 31,
+      "bounds": {
+        "min": [
+          4.176999999999999,
+          2.2227500000000004,
+          -3.6984999999999997
+        ],
+        "max": [
+          7.3229999999999995,
+          3.899,
+          -0.7119999999999997
+        ]
+      },
+      "spacing": 0.22867551062346267,
+      "geometricError": 0.22867551062346267,
+      "subtreeMinSpacing": 0.22867551062346267,
+      "bytes": 1212,
+      "hash": "b59e95b04d150a24",
+      "payloadOffset": 0,
+      "payloadLength": 1212,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/4",
+      "path": "0/4",
+      "depth": 1,
+      "children": [
+        "0/4/2",
+        "0/4/3",
+        "0/4/6",
+        "0/4/7"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 26733,
+      "bounds": {
+        "min": [
+          -5.261,
+          -2.806,
+          -0.7119999999999997
+        ],
+        "max": [
+          1.0309999999999997,
+          0.5465,
+          5.261
+        ]
+      },
+      "spacing": 0.03748274533405747,
+      "geometricError": 0.03748274533405747,
+      "subtreeMinSpacing": 0.012784990828404898,
+      "bytes": 144096,
+      "hash": "3e88c90c2a805406",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.14962780084539706
+    },
+    {
+      "id": "0/4/2",
+      "path": "0/4/2",
+      "depth": 2,
+      "children": [
+        "0/4/2/0",
+        "0/4/2/1",
+        "0/4/2/3",
+        "0/4/2/4",
+        "0/4/2/5"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 4571,
+      "bounds": {
+        "min": [
+          -5.261,
+          -1.12975,
+          -0.7119999999999997
+        ],
+        "max": [
+          -2.115,
+          0.5465,
+          2.2745000000000006
+        ]
+      },
+      "spacing": 0.027525181080009148,
+      "geometricError": 0.027525181080009148,
+      "subtreeMinSpacing": 0.027525181080009148,
+      "bytes": 144096,
+      "hash": "e2c751de4093a17f",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.8750820389411508
+    },
+    {
+      "id": "0/4/2/0",
+      "path": "0/4/2/0",
+      "depth": 3,
+      "children": [],
+      "pointCount": 135,
+      "subtreePointCount": 135,
+      "bounds": {
+        "min": [
+          -5.261,
+          -1.12975,
+          -0.7119999999999997
+        ],
+        "max": [
+          -3.688,
+          -0.2916249999999998,
+          0.78125
+        ]
+      },
+      "spacing": 0.06122167261036332,
+      "geometricError": 0.06122167261036332,
+      "subtreeMinSpacing": 0.06122167261036332,
+      "bytes": 4956,
+      "hash": "162d59bb83214f40",
+      "payloadOffset": 0,
+      "payloadLength": 4956,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/4/2/1",
+      "path": "0/4/2/1",
+      "depth": 3,
+      "children": [],
+      "pointCount": 136,
+      "subtreePointCount": 136,
+      "bounds": {
+        "min": [
+          -3.688,
+          -1.12975,
+          -0.7119999999999997
+        ],
+        "max": [
+          -2.115,
+          -0.2916249999999998,
+          0.78125
+        ]
+      },
+      "spacing": 0.05848405981199194,
+      "geometricError": 0.05848405981199194,
+      "subtreeMinSpacing": 0.05848405981199194,
+      "bytes": 4992,
+      "hash": "a497660dce807d79",
+      "payloadOffset": 0,
+      "payloadLength": 4992,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/4/2/3",
+      "path": "0/4/2/3",
+      "depth": 3,
+      "children": [],
+      "pointCount": 4,
+      "subtreePointCount": 4,
+      "bounds": {
+        "min": [
+          -3.688,
+          -0.2916249999999998,
+          -0.7119999999999997
+        ],
+        "max": [
+          -2.115,
+          0.5465,
+          0.78125
+        ]
+      },
+      "spacing": 0.13108333333333333,
+      "geometricError": 0.13108333333333333,
+      "subtreeMinSpacing": 0.13108333333333333,
+      "bytes": 240,
+      "hash": "660cdd6cbaa6e672",
+      "payloadOffset": 0,
+      "payloadLength": 240,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/4/2/4",
+      "path": "0/4/2/4",
+      "depth": 3,
+      "children": [],
+      "pointCount": 137,
+      "subtreePointCount": 137,
+      "bounds": {
+        "min": [
+          -5.261,
+          -1.12975,
+          0.78125
+        ],
+        "max": [
+          -3.688,
+          -0.2916249999999998,
+          2.2745000000000006
+        ]
+      },
+      "spacing": 0.05419407133649089,
+      "geometricError": 0.05419407133649089,
+      "subtreeMinSpacing": 0.05419407133649089,
+      "bytes": 5028,
+      "hash": "fc01c9dc297bf12a",
+      "payloadOffset": 0,
+      "payloadLength": 5028,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/4/2/5",
+      "path": "0/4/2/5",
+      "depth": 3,
+      "children": [],
+      "pointCount": 159,
+      "subtreePointCount": 159,
+      "bounds": {
+        "min": [
+          -3.688,
+          -1.12975,
+          0.78125
+        ],
+        "max": [
+          -2.115,
+          -0.2916249999999998,
+          2.2745000000000006
+        ]
+      },
+      "spacing": 0.05947101154317528,
+      "geometricError": 0.05947101154317528,
+      "subtreeMinSpacing": 0.05947101154317528,
+      "bytes": 5820,
+      "hash": "ad99cffd1528fa26",
+      "payloadOffset": 0,
+      "payloadLength": 5820,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/4/3",
+      "path": "0/4/3",
+      "depth": 2,
+      "children": [
+        "0/4/3/0",
+        "0/4/3/1",
+        "0/4/3/2",
+        "0/4/3/4",
+        "0/4/3/5"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 8496,
+      "bounds": {
+        "min": [
+          -2.115,
+          -1.12975,
+          -0.7119999999999997
+        ],
+        "max": [
+          1.0309999999999997,
+          0.5465,
+          2.2745000000000006
+        ]
+      },
+      "spacing": 0.021868230230716823,
+      "geometricError": 0.021868230230716823,
+      "subtreeMinSpacing": 0.017405723251192457,
+      "bytes": 144096,
+      "hash": "e83d781cb6f8213d",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.4708097928436911
+    },
+    {
+      "id": "0/4/3/0",
+      "path": "0/4/3/0",
+      "depth": 3,
+      "children": [],
+      "pointCount": 979,
+      "subtreePointCount": 979,
+      "bounds": {
+        "min": [
+          -2.115,
+          -1.12975,
+          -0.7119999999999997
+        ],
+        "max": [
+          -0.5420000000000007,
+          -0.2916249999999998,
+          0.78125
+        ]
+      },
+      "spacing": 0.022274617164999823,
+      "geometricError": 0.022274617164999823,
+      "subtreeMinSpacing": 0.022274617164999823,
+      "bytes": 35340,
+      "hash": "595c77b4aa6edc87",
+      "payloadOffset": 0,
+      "payloadLength": 35340,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/4/3/1",
+      "path": "0/4/3/1",
+      "depth": 3,
+      "children": [],
+      "pointCount": 643,
+      "subtreePointCount": 643,
+      "bounds": {
+        "min": [
+          -0.5420000000000007,
+          -1.12975,
+          -0.7119999999999997
+        ],
+        "max": [
+          1.0309999999999997,
+          -0.2916249999999998,
+          0.78125
+        ]
+      },
+      "spacing": 0.033908143286400495,
+      "geometricError": 0.033908143286400495,
+      "subtreeMinSpacing": 0.033908143286400495,
+      "bytes": 23244,
+      "hash": "bd616f8f65f0085b",
+      "payloadOffset": 0,
+      "payloadLength": 23244,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/4/3/2",
+      "path": "0/4/3/2",
+      "depth": 3,
+      "children": [],
+      "pointCount": 1573,
+      "subtreePointCount": 1573,
+      "bounds": {
+        "min": [
+          -2.115,
+          -0.2916249999999998,
+          -0.7119999999999997
+        ],
+        "max": [
+          -0.5420000000000007,
+          0.5465,
+          0.78125
+        ]
+      },
+      "spacing": 0.017405723251192457,
+      "geometricError": 0.017405723251192457,
+      "subtreeMinSpacing": 0.017405723251192457,
+      "bytes": 56724,
+      "hash": "9db0fce1e0e8da93",
+      "payloadOffset": 0,
+      "payloadLength": 56724,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/4/3/4",
+      "path": "0/4/3/4",
+      "depth": 3,
+      "children": [],
+      "pointCount": 656,
+      "subtreePointCount": 656,
+      "bounds": {
+        "min": [
+          -2.115,
+          -1.12975,
+          0.78125
+        ],
+        "max": [
+          -0.5420000000000007,
+          -0.2916249999999998,
+          2.2745000000000006
+        ]
+      },
+      "spacing": 0.03351250914954206,
+      "geometricError": 0.03351250914954206,
+      "subtreeMinSpacing": 0.03351250914954206,
+      "bytes": 23712,
+      "hash": "00facbd5f6ff0fea",
+      "payloadOffset": 0,
+      "payloadLength": 23712,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/4/3/5",
+      "path": "0/4/3/5",
+      "depth": 3,
+      "children": [],
+      "pointCount": 645,
+      "subtreePointCount": 645,
+      "bounds": {
+        "min": [
+          -0.5420000000000007,
+          -1.12975,
+          0.78125
+        ],
+        "max": [
+          1.0309999999999997,
+          -0.2916249999999998,
+          2.2745000000000006
+        ]
+      },
+      "spacing": 0.03410882215074082,
+      "geometricError": 0.03410882215074082,
+      "subtreeMinSpacing": 0.03410882215074082,
+      "bytes": 23316,
+      "hash": "ad82f845d1bf130e",
+      "payloadOffset": 0,
+      "payloadLength": 23316,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/4/6",
+      "path": "0/4/6",
+      "depth": 2,
+      "children": [
+        "0/4/6/0",
+        "0/4/6/1",
+        "0/4/6/3",
+        "0/4/6/4",
+        "0/4/6/5"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 5173,
+      "bounds": {
+        "min": [
+          -5.261,
+          -1.12975,
+          2.2745000000000006
+        ],
+        "max": [
+          -2.115,
+          0.5465,
+          5.261
+        ]
+      },
+      "spacing": 0.019777975184174842,
+      "geometricError": 0.019777975184174842,
+      "subtreeMinSpacing": 0.012784990828404898,
+      "bytes": 144096,
+      "hash": "f3c0a88a500c915b",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.7732456988208003
+    },
+    {
+      "id": "0/4/6/0",
+      "path": "0/4/6/0",
+      "depth": 3,
+      "children": [],
+      "pointCount": 241,
+      "subtreePointCount": 241,
+      "bounds": {
+        "min": [
+          -5.261,
+          -1.12975,
+          2.2745000000000006
+        ],
+        "max": [
+          -3.688,
+          -0.2916249999999998,
+          3.7677500000000004
+        ]
+      },
+      "spacing": 0.04605858673962724,
+      "geometricError": 0.04605858673962724,
+      "subtreeMinSpacing": 0.04605858673962724,
+      "bytes": 8772,
+      "hash": "5b5f9fdf9f5641d6",
+      "payloadOffset": 0,
+      "payloadLength": 8772,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/4/6/1",
+      "path": "0/4/6/1",
+      "depth": 3,
+      "children": [],
+      "pointCount": 368,
+      "subtreePointCount": 368,
+      "bounds": {
+        "min": [
+          -3.688,
+          -1.12975,
+          2.2745000000000006
+        ],
+        "max": [
+          -2.115,
+          -0.2916249999999998,
+          3.7677500000000004
+        ]
+      },
+      "spacing": 0.02404380910695193,
+      "geometricError": 0.02404380910695193,
+      "subtreeMinSpacing": 0.02404380910695193,
+      "bytes": 13344,
+      "hash": "6afed6c674393cbf",
+      "payloadOffset": 0,
+      "payloadLength": 13344,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/4/6/3",
+      "path": "0/4/6/3",
+      "depth": 3,
+      "children": [],
+      "pointCount": 137,
+      "subtreePointCount": 137,
+      "bounds": {
+        "min": [
+          -3.688,
+          -0.2916249999999998,
+          2.2745000000000006
+        ],
+        "max": [
+          -2.115,
+          0.5465,
+          3.7677500000000004
+        ]
+      },
+      "spacing": 0.012784990828404898,
+      "geometricError": 0.012784990828404898,
+      "subtreeMinSpacing": 0.012784990828404898,
+      "bytes": 5028,
+      "hash": "67a37b7780124134",
+      "payloadOffset": 0,
+      "payloadLength": 5028,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/4/6/4",
+      "path": "0/4/6/4",
+      "depth": 3,
+      "children": [],
+      "pointCount": 196,
+      "subtreePointCount": 196,
+      "bounds": {
+        "min": [
+          -5.261,
+          -1.12975,
+          3.7677500000000004
+        ],
+        "max": [
+          -3.688,
+          -0.2916249999999998,
+          5.261
+        ]
+      },
+      "spacing": 0.04237489559651207,
+      "geometricError": 0.04237489559651207,
+      "subtreeMinSpacing": 0.04237489559651207,
+      "bytes": 7152,
+      "hash": "aecda016ac7fe9ef",
+      "payloadOffset": 0,
+      "payloadLength": 7152,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/4/6/5",
+      "path": "0/4/6/5",
+      "depth": 3,
+      "children": [],
+      "pointCount": 231,
+      "subtreePointCount": 231,
+      "bounds": {
+        "min": [
+          -3.688,
+          -1.12975,
+          3.7677500000000004
+        ],
+        "max": [
+          -2.115,
+          -0.2916249999999998,
+          5.261
+        ]
+      },
+      "spacing": 0.04411202850544422,
+      "geometricError": 0.04411202850544422,
+      "subtreeMinSpacing": 0.04411202850544422,
+      "bytes": 8412,
+      "hash": "5ee9d9d230541184",
+      "payloadOffset": 0,
+      "payloadLength": 8412,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/4/7",
+      "path": "0/4/7",
+      "depth": 2,
+      "children": [
+        "0/4/7/0",
+        "0/4/7/1",
+        "0/4/7/4",
+        "0/4/7/5"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 4493,
+      "bounds": {
+        "min": [
+          -2.115,
+          -1.12975,
+          2.2745000000000006
+        ],
+        "max": [
+          1.0309999999999997,
+          0.5465,
+          5.261
+        ]
+      },
+      "spacing": 0.028021761582931116,
+      "geometricError": 0.028021761582931116,
+      "subtreeMinSpacing": 0.028021761582931116,
+      "bytes": 144096,
+      "hash": "b5735da04aa437b2",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.8902737591809481
+    },
+    {
+      "id": "0/4/7/0",
+      "path": "0/4/7/0",
+      "depth": 3,
+      "children": [],
+      "pointCount": 137,
+      "subtreePointCount": 137,
+      "bounds": {
+        "min": [
+          -2.115,
+          -1.12975,
+          2.2745000000000006
+        ],
+        "max": [
+          -0.5420000000000007,
+          -0.2916249999999998,
+          3.7677500000000004
+        ]
+      },
+      "spacing": 0.05183965858927447,
+      "geometricError": 0.05183965858927447,
+      "subtreeMinSpacing": 0.05183965858927447,
+      "bytes": 5028,
+      "hash": "896698586644c951",
+      "payloadOffset": 0,
+      "payloadLength": 5028,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/4/7/1",
+      "path": "0/4/7/1",
+      "depth": 3,
+      "children": [],
+      "pointCount": 131,
+      "subtreePointCount": 131,
+      "bounds": {
+        "min": [
+          -0.5420000000000007,
+          -1.12975,
+          2.2745000000000006
+        ],
+        "max": [
+          1.0309999999999997,
+          -0.2916249999999998,
+          3.7677500000000004
+        ]
+      },
+      "spacing": 0.061216305244210005,
+      "geometricError": 0.061216305244210005,
+      "subtreeMinSpacing": 0.061216305244210005,
+      "bytes": 4812,
+      "hash": "0f9bb2bbec011236",
+      "payloadOffset": 0,
+      "payloadLength": 4812,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/4/7/4",
+      "path": "0/4/7/4",
+      "depth": 3,
+      "children": [],
+      "pointCount": 107,
+      "subtreePointCount": 107,
+      "bounds": {
+        "min": [
+          -2.115,
+          -1.12975,
+          3.7677500000000004
+        ],
+        "max": [
+          -0.5420000000000007,
+          -0.2916249999999998,
+          5.261
+        ]
+      },
+      "spacing": 0.05958619577230717,
+      "geometricError": 0.05958619577230717,
+      "subtreeMinSpacing": 0.05958619577230717,
+      "bytes": 3948,
+      "hash": "1fae53ac33ff4b0b",
+      "payloadOffset": 0,
+      "payloadLength": 3948,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/4/7/5",
+      "path": "0/4/7/5",
+      "depth": 3,
+      "children": [],
+      "pointCount": 118,
+      "subtreePointCount": 118,
+      "bounds": {
+        "min": [
+          -0.5420000000000007,
+          -1.12975,
+          3.7677500000000004
+        ],
+        "max": [
+          1.0309999999999997,
+          -0.2916249999999998,
+          5.261
+        ]
+      },
+      "spacing": 0.052066675055762915,
+      "geometricError": 0.052066675055762915,
+      "subtreeMinSpacing": 0.052066675055762915,
+      "bytes": 4344,
+      "hash": "6b641c2c14bc816b",
+      "payloadOffset": 0,
+      "payloadLength": 4344,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/5",
+      "path": "0/5",
+      "depth": 1,
+      "children": [
+        "0/5/0",
+        "0/5/1",
+        "0/5/2",
+        "0/5/3",
+        "0/5/6",
+        "0/5/7"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 31922,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -2.806,
+          -0.7119999999999997
+        ],
+        "max": [
+          7.3229999999999995,
+          0.5465,
+          5.261
+        ]
+      },
+      "spacing": 0.026823780990989872,
+      "geometricError": 0.026823780990989872,
+      "subtreeMinSpacing": 0.014309960310174863,
+      "bytes": 144096,
+      "hash": "68a2903266f894d8",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.12530543199047678
+    },
+    {
+      "id": "0/5/0",
+      "path": "0/5/0",
+      "depth": 2,
+      "children": [],
+      "pointCount": 4,
+      "subtreePointCount": 4,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -2.806,
+          -0.7119999999999997
+        ],
+        "max": [
+          4.176999999999999,
+          -1.12975,
+          2.2745000000000006
+        ]
+      },
+      "spacing": 0.2621666666666666,
+      "geometricError": 0.2621666666666666,
+      "subtreeMinSpacing": 0.2621666666666666,
+      "bytes": 240,
+      "hash": "fa19d515ee72671d",
+      "payloadOffset": 0,
+      "payloadLength": 240,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/5/1",
+      "path": "0/5/1",
+      "depth": 2,
+      "children": [],
+      "pointCount": 1,
+      "subtreePointCount": 1,
+      "bounds": {
+        "min": [
+          4.176999999999999,
+          -2.806,
+          -0.7119999999999997
+        ],
+        "max": [
+          7.3229999999999995,
+          -1.12975,
+          2.2745000000000006
+        ]
+      },
+      "spacing": 0.2621666666666667,
+      "geometricError": 0.2621666666666667,
+      "subtreeMinSpacing": 0.2621666666666667,
+      "bytes": 132,
+      "hash": "fd16b65a52522631",
+      "payloadOffset": 0,
+      "payloadLength": 132,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/5/2",
+      "path": "0/5/2",
+      "depth": 2,
+      "children": [
+        "0/5/2/0",
+        "0/5/2/1",
+        "0/5/2/2",
+        "0/5/2/3",
+        "0/5/2/4",
+        "0/5/2/5"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 12379,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -1.12975,
+          -0.7119999999999997
+        ],
+        "max": [
+          4.176999999999999,
+          0.5465,
+          2.2745000000000006
+        ]
+      },
+      "spacing": 0.02065902089522909,
+      "geometricError": 0.02065902089522909,
+      "subtreeMinSpacing": 0.014309960310174863,
+      "bytes": 144096,
+      "hash": "1fc42c46887b055d",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.32312787785766217
+    },
+    {
+      "id": "0/5/2/0",
+      "path": "0/5/2/0",
+      "depth": 3,
+      "children": [],
+      "pointCount": 1230,
+      "subtreePointCount": 1230,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -1.12975,
+          -0.7119999999999997
+        ],
+        "max": [
+          2.604,
+          -0.2916249999999998,
+          0.78125
+        ]
+      },
+      "spacing": 0.014309960310174863,
+      "geometricError": 0.014309960310174863,
+      "subtreeMinSpacing": 0.014309960310174863,
+      "bytes": 44376,
+      "hash": "50fe8cb5033483ad",
+      "payloadOffset": 0,
+      "payloadLength": 44376,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/5/2/1",
+      "path": "0/5/2/1",
+      "depth": 3,
+      "children": [],
+      "pointCount": 850,
+      "subtreePointCount": 850,
+      "bounds": {
+        "min": [
+          2.604,
+          -1.12975,
+          -0.7119999999999997
+        ],
+        "max": [
+          4.176999999999999,
+          -0.2916249999999998,
+          0.78125
+        ]
+      },
+      "spacing": 0.029331354586377895,
+      "geometricError": 0.029331354586377895,
+      "subtreeMinSpacing": 0.029331354586377895,
+      "bytes": 30696,
+      "hash": "803188dcd1e95247",
+      "payloadOffset": 0,
+      "payloadLength": 30696,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/5/2/2",
+      "path": "0/5/2/2",
+      "depth": 3,
+      "children": [],
+      "pointCount": 13,
+      "subtreePointCount": 13,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -0.2916249999999998,
+          -0.7119999999999997
+        ],
+        "max": [
+          2.604,
+          0.5465,
+          0.78125
+        ]
+      },
+      "spacing": 0.2877295988232991,
+      "geometricError": 0.2877295988232991,
+      "subtreeMinSpacing": 0.2877295988232991,
+      "bytes": 564,
+      "hash": "07bbdd7a99d51f6b",
+      "payloadOffset": 0,
+      "payloadLength": 564,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/5/2/3",
+      "path": "0/5/2/3",
+      "depth": 3,
+      "children": [],
+      "pointCount": 26,
+      "subtreePointCount": 26,
+      "bounds": {
+        "min": [
+          2.604,
+          -0.2916249999999998,
+          -0.7119999999999997
+        ],
+        "max": [
+          4.176999999999999,
+          0.5465,
+          0.78125
+        ]
+      },
+      "spacing": 0.19018195882393382,
+      "geometricError": 0.19018195882393382,
+      "subtreeMinSpacing": 0.19018195882393382,
+      "bytes": 1032,
+      "hash": "413104e3a0ddbd78",
+      "payloadOffset": 0,
+      "payloadLength": 1032,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/5/2/4",
+      "path": "0/5/2/4",
+      "depth": 3,
+      "children": [],
+      "pointCount": 3115,
+      "subtreePointCount": 3115,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -1.12975,
+          0.78125
+        ],
+        "max": [
+          2.604,
+          -0.2916249999999998,
+          2.2745000000000006
+        ]
+      },
+      "spacing": 0.015936947938285335,
+      "geometricError": 0.015936947938285335,
+      "subtreeMinSpacing": 0.015936947938285335,
+      "bytes": 112236,
+      "hash": "2188ba424e5afd55",
+      "payloadOffset": 0,
+      "payloadLength": 112236,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/5/2/5",
+      "path": "0/5/2/5",
+      "depth": 3,
+      "children": [],
+      "pointCount": 3145,
+      "subtreePointCount": 3145,
+      "bounds": {
+        "min": [
+          2.604,
+          -1.12975,
+          0.78125
+        ],
+        "max": [
+          4.176999999999999,
+          -0.2916249999999998,
+          2.2745000000000006
+        ]
+      },
+      "spacing": 0.016142609611274172,
+      "geometricError": 0.016142609611274172,
+      "subtreeMinSpacing": 0.016142609611274172,
+      "bytes": 113316,
+      "hash": "62a08b38a71d8115",
+      "payloadOffset": 0,
+      "payloadLength": 113316,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/5/3",
+      "path": "0/5/3",
+      "depth": 2,
+      "children": [],
+      "pointCount": 1345,
+      "subtreePointCount": 1345,
+      "bounds": {
+        "min": [
+          4.176999999999999,
+          -1.12975,
+          -0.7119999999999997
+        ],
+        "max": [
+          7.3229999999999995,
+          0.5465,
+          2.2745000000000006
+        ]
+      },
+      "spacing": 0.026639255558535486,
+      "geometricError": 0.026639255558535486,
+      "subtreeMinSpacing": 0.026639255558535486,
+      "bytes": 48516,
+      "hash": "65b7bad175849ed2",
+      "payloadOffset": 0,
+      "payloadLength": 48516,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/5/6",
+      "path": "0/5/6",
+      "depth": 2,
+      "children": [
+        "0/5/6/0",
+        "0/5/6/1",
+        "0/5/6/4",
+        "0/5/6/5"
+      ],
+      "pointCount": 4000,
+      "subtreePointCount": 12996,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -1.12975,
+          2.2745000000000006
+        ],
+        "max": [
+          4.176999999999999,
+          0.5465,
+          5.261
+        ]
+      },
+      "spacing": 0.020792429982475352,
+      "geometricError": 0.020792429982475352,
+      "subtreeMinSpacing": 0.014446930583292451,
+      "bytes": 144096,
+      "hash": "19ed33fffcf31456",
+      "payloadOffset": 0,
+      "payloadLength": 144096,
+      "hasPayload": true,
+      "samplingRate": 0.3077870113881194
+    },
+    {
+      "id": "0/5/6/0",
+      "path": "0/5/6/0",
+      "depth": 3,
+      "children": [],
+      "pointCount": 3804,
+      "subtreePointCount": 3804,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -1.12975,
+          2.2745000000000006
+        ],
+        "max": [
+          2.604,
+          -0.2916249999999998,
+          3.7677500000000004
+        ]
+      },
+      "spacing": 0.014446930583292451,
+      "geometricError": 0.014446930583292451,
+      "subtreeMinSpacing": 0.014446930583292451,
+      "bytes": 137040,
+      "hash": "96295a16c4cb83a0",
+      "payloadOffset": 0,
+      "payloadLength": 137040,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/5/6/1",
+      "path": "0/5/6/1",
+      "depth": 3,
+      "children": [],
+      "pointCount": 3790,
+      "subtreePointCount": 3790,
+      "bounds": {
+        "min": [
+          2.604,
+          -1.12975,
+          2.2745000000000006
+        ],
+        "max": [
+          4.176999999999999,
+          -0.2916249999999998,
+          3.7677500000000004
+        ]
+      },
+      "spacing": 0.015051685143133259,
+      "geometricError": 0.015051685143133259,
+      "subtreeMinSpacing": 0.015051685143133259,
+      "bytes": 136536,
+      "hash": "edf277d0b234203f",
+      "payloadOffset": 0,
+      "payloadLength": 136536,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/5/6/4",
+      "path": "0/5/6/4",
+      "depth": 3,
+      "children": [],
+      "pointCount": 714,
+      "subtreePointCount": 714,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          -1.12975,
+          3.7677500000000004
+        ],
+        "max": [
+          2.604,
+          -0.2916249999999998,
+          5.261
+        ]
+      },
+      "spacing": 0.0298051612353073,
+      "geometricError": 0.0298051612353073,
+      "subtreeMinSpacing": 0.0298051612353073,
+      "bytes": 25800,
+      "hash": "6b7eaa1dc5f894d3",
+      "payloadOffset": 0,
+      "payloadLength": 25800,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/5/6/5",
+      "path": "0/5/6/5",
+      "depth": 3,
+      "children": [],
+      "pointCount": 688,
+      "subtreePointCount": 688,
+      "bounds": {
+        "min": [
+          2.604,
+          -1.12975,
+          3.7677500000000004
+        ],
+        "max": [
+          4.176999999999999,
+          -0.2916249999999998,
+          5.261
+        ]
+      },
+      "spacing": 0.02939714325678403,
+      "geometricError": 0.02939714325678403,
+      "subtreeMinSpacing": 0.02939714325678403,
+      "bytes": 24864,
+      "hash": "3b0509ce6ef71288",
+      "payloadOffset": 0,
+      "payloadLength": 24864,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/5/7",
+      "path": "0/5/7",
+      "depth": 2,
+      "children": [],
+      "pointCount": 1197,
+      "subtreePointCount": 1197,
+      "bounds": {
+        "min": [
+          4.176999999999999,
+          -1.12975,
+          2.2745000000000006
+        ],
+        "max": [
+          7.3229999999999995,
+          0.5465,
+          5.261
+        ]
+      },
+      "spacing": 0.024517916171512402,
+      "geometricError": 0.024517916171512402,
+      "subtreeMinSpacing": 0.024517916171512402,
+      "bytes": 43188,
+      "hash": "4f2c32b1282b737a",
+      "payloadOffset": 0,
+      "payloadLength": 43188,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/6",
+      "path": "0/6",
+      "depth": 1,
+      "children": [],
+      "pointCount": 2241,
+      "subtreePointCount": 2241,
+      "bounds": {
+        "min": [
+          -5.261,
+          0.5465,
+          -0.7119999999999997
+        ],
+        "max": [
+          1.0309999999999997,
+          3.899,
+          5.261
+        ]
+      },
+      "spacing": 0.012454556429763057,
+      "geometricError": 0.012454556429763057,
+      "subtreeMinSpacing": 0.012454556429763057,
+      "bytes": 80772,
+      "hash": "d3ab01448ed3fa08",
+      "payloadOffset": 0,
+      "payloadLength": 80772,
+      "hasPayload": true,
+      "samplingRate": 1
+    },
+    {
+      "id": "0/7",
+      "path": "0/7",
+      "depth": 1,
+      "children": [],
+      "pointCount": 87,
+      "subtreePointCount": 87,
+      "bounds": {
+        "min": [
+          1.0309999999999997,
+          0.5465,
+          -0.7119999999999997
+        ],
+        "max": [
+          7.3229999999999995,
+          3.899,
+          5.261
+        ]
+      },
+      "spacing": 0.20038783775803434,
+      "geometricError": 0.20038783775803434,
+      "subtreeMinSpacing": 0.20038783775803434,
+      "bytes": 3228,
+      "hash": "abce6fe29abbb321",
+      "payloadOffset": 0,
+      "payloadLength": 3228,
+      "hasPayload": true,
+      "samplingRate": 1
+    }
+  ],
+  "createdAt": "2026-11-17T01:52:01.506Z",
+  "seed": 20261117,
+  "notes": "synthetic small scan, 187721 points, 3 stations"
+}
