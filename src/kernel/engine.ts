@@ -9,6 +9,13 @@
  *   4. upload newly resident payloads, drop retired ones
  *   5. draw resident nodes belonging to the current cut
  *
+ * The draw list is generation-tagged. A rendered payload is removed only after
+ * the cache confirms its replacement is resident (`canRetire`) and its draw use
+ * is released; an upload from a previous residency of the same node is rejected
+ * instead of being drawn in the new slot. A retiring payload therefore stays on
+ * screen across a budget-driven reclamation until the coarse replacement has
+ * been uploaded, which is what keeps a hard budget from flashing.
+ *
  * The engine never removes a drawn node in the same frame it requests its
  * replacement. Coverage therefore only ever changes discontinuously upward
  * (more detail). When a node cannot be refined (budget, failure), its ancestor
@@ -60,6 +67,15 @@ export type FrameStats = {
   requestsAborted: number;
   requestsFailed: number;
   evictions: number;
+  /** Responses that arrived after their request had been superseded. */
+  staleResponses: number;
+  /** Retiring payloads held on screen for a not-yet-resident replacement. */
+  retainedNodes: number;
+  retainedBytes: number;
+  /** Retirements forced past the replacement rule by the retention window. */
+  retentionExpiries: number;
+  /** Rendered nodes whose replacement is still loading (draw list lags cut). */
+  drawnRetiringNodes: number;
   culledNodes: number;
   visitedNodes: number;
   budgetLimited: boolean;
@@ -88,6 +104,29 @@ export type SelectionSnapshot = {
   selectedSet: Set<NodeIndex>;
   deferred: NodeIndex[];
   result: SelectionResult;
+};
+
+export type DrawEvidence = {
+  drawnNodes: number;
+  /** Draw entries whose residency is gone or has a different generation. */
+  staleDraws: number;
+  /** Drawn nodes outside the cut, kept until their replacement is resident. */
+  drawnRetiring: number;
+  /** Drawn retiree whose replacement is still not resident (a retained block). */
+  unresolvableRetirements: number;
+  /** Selected nodes with no drawn ancestor-or-self and nothing loading to fill it. */
+  uncoveredNodes: number;
+  uncoveredSample: NodeIndex[];
+  /** Selected nodes with no drawn ancestor-or-self, but whose coverage is still loading. */
+  pendingCoverageNodes: number;
+  /** Root residency drives whether anything at all can be drawn. */
+  rootResident: boolean;
+  rootInCut: boolean;
+  retainedNodes: number;
+  retainedBytes: number;
+  staleResponses: number;
+  retentionExpiries: number;
+  renderer: import("../render/point-renderer").RenderStats;
 };
 
 export class StreamingEngine {
@@ -121,7 +160,6 @@ export class StreamingEngine {
   private lastStats: FrameStats | null = null;
   private onFrame?: (stats: FrameStats) => void;
   private onEvent?: (event: CacheEvent) => void;
-  private pendingUploads: Set<NodeIndex> = new Set();
   private forcedDepth = -1;
   private history: FrameStats[] = [];
   private traceLimit = 3600;
@@ -147,6 +185,7 @@ export class StreamingEngine {
       inflightByteBudget: 0,
       maxConcurrent: 8,
       retryBackoffMs: 800,
+      retentionMs: 4000,
       fetch: this.loader.fetch,
       onChange: (e) => this.handleCacheEvent(e),
       hooks: {
@@ -245,10 +284,10 @@ export class StreamingEngine {
   }
 
   private handleCacheEvent(e: CacheEvent) {
-    if (e.kind === "resident") {
-      this.pendingUploads.add(e.node);
-    } else if (e.kind === "evicted") {
-      this.renderer.removeNode(e.node);
+    if (e.kind === "evicted") {
+      // The cache only emits this once use is complete and the replacement is
+      // resident, so dropping the draw entry here cannot open a hole.
+      this.renderer.removeNode(e.node, e.entry.generation);
     }
     this.onEvent?.(e);
   }
@@ -325,19 +364,32 @@ export class StreamingEngine {
     // Upload every node in the cut that is resident but not yet on the GPU.
     // Doing this by inspecting the cut (rather than only this frame's arrival
     // events) means a payload that arrived for a previous cut is still uploaded
-    // if the camera returns to it, and a failed upload cannot linger.
+    // if the camera returns to it, and a failed upload cannot linger. The
+    // generation taken at upload time is what the draw entry carries.
     const uploadStart = performance.now();
     for (const node of result.selected) {
-      if (this.renderer.hasNode(node)) continue;
+      if (this.renderer.hasNode(node)) {
+        this.renderer.touchDraw(node, this.cache.generationOf(node));
+        continue;
+      }
       const entry = this.cache.get(node);
-      if (entry) this.renderer.addNode(node, entry.views);
+      if (!entry) continue;
+      const generation = this.cache.acquireDraw(node);
+      if (generation === 0) continue;
+      this.renderer.addNode(node, entry.views, generation);
     }
-    this.pendingUploads.clear();
-    // Remove any rendered node no longer in the cut. Its replacement (the
-    // ancestor) is resident by construction, so this cannot create a hole.
+    // Remove a rendered node no longer in the cut only when the cache says its
+    // replacement is resident (or the bounded retention window expired). Until
+    // then the coarse-or-finer payload stays on screen: reclamation of the
+    // bytes is deferred by the use pin, so this cannot read freed data.
     for (const node of this.rendererNodes()) {
-      if (!selectedSet.has(node)) this.renderer.removeNode(node);
+      if (selectedSet.has(node)) continue;
+      if (!this.cache.canRetire(node)) continue;
+      const generation = this.renderer.generationOf(node);
+      this.renderer.removeNode(node, generation);
+      this.cache.releaseDraw(node, generation);
     }
+    this.cache.collect();
     const uploadMs = performance.now() - uploadStart;
 
     // --- draw ---
@@ -381,6 +433,12 @@ export class StreamingEngine {
     const render = this.renderer.getStats();
     const expected = result.drawnPoints;
     const cameraDistance = this.orbit.radius;
+    // Rendered nodes outside the cut that are still waiting for a replacement.
+    const selectedSet = new Set(result.selected);
+    let drawnRetiring = 0;
+    for (const node of this.rendererNodes()) {
+      if (!selectedSet.has(node)) drawnRetiring++;
+    }
     return {
       frame: this.frameCount,
       time: now,
@@ -401,6 +459,11 @@ export class StreamingEngine {
       requestsAborted: counters.requestsAborted,
       requestsFailed: counters.requestsFailed,
       evictions: counters.evictions,
+      staleResponses: counters.staleResponses,
+      retainedNodes: counters.retainedNodes,
+      retainedBytes: counters.retainedBytes,
+      retentionExpiries: counters.retentionExpiries,
+      drawnRetiringNodes: drawnRetiring,
       culledNodes: result.culled,
       visitedNodes: result.visited,
       budgetLimited: result.budgetLimited,
@@ -500,6 +563,66 @@ export class StreamingEngine {
   /** Load and draw the coarsest cut immediately; used by tests before timing. */
   warmUp(frames = 12) {
     for (let i = 0; i < frames; i++) this.frame(performance.now() + i * 16);
+  }
+
+  /**
+   * Draw-list ↔ cache evidence for the current frame.
+   *
+   * Verifies the property the streaming layer is supposed to guarantee at every
+   * instant: every node the renderer draws is backed by a live residency of the
+   * same generation, and every selected node that is not resident has a drawn
+   * ancestor (so its region is coarse, not empty). These are counted, not
+   * assumed, so the UI and the CLI report the same evidence.
+   */
+  drawEvidence(): DrawEvidence {
+    const selected = this.selection.selectedSet;
+    const drawn = this.renderer.residentNodeList();
+    let staleDraws = 0;
+    let unresolvedBlocks = 0;
+    let drawnRetiring = 0;
+    for (const node of drawn) {
+      const entry = this.cache.get(node);
+      if (!entry || entry.generation !== this.renderer.generationOf(node)) {
+        staleDraws++;
+        continue;
+      }
+      if (!selected.has(node)) drawnRetiring++;
+      if (!selected.has(node) && !this.cache.canRetire(node)) unresolvedBlocks++;
+    }
+    const drawnSet = new Set(drawn);
+    const uncovered: NodeIndex[] = [];
+    let pendingCoverage = 0;
+    for (const node of selected) {
+      let cur: NodeIndex = node;
+      let covered = false;
+      let loading = false;
+      while (cur >= 0) {
+        if (drawnSet.has(cur)) { covered = true; break; }
+        if (this.cache.isInflight(cur)) loading = true;
+        cur = this.hierarchy.parent[cur];
+      }
+      if (covered) continue;
+      if (loading) { pendingCoverage++; continue; }
+      uncovered.push(node);
+    }
+    const counters = this.cache.snapshot();
+    const root = this.hierarchy.root;
+    return {
+      drawnNodes: drawn.length,
+      staleDraws,
+      drawnRetiring,
+      unresolvableRetirements: unresolvedBlocks,
+      uncoveredNodes: uncovered.length,
+      uncoveredSample: uncovered.slice(0, 8),
+      pendingCoverageNodes: pendingCoverage,
+      rootResident: this.cache.has(root),
+      rootInCut: selected.has(root),
+      retainedNodes: counters.retainedNodes,
+      retainedBytes: counters.retainedBytes,
+      staleResponses: counters.staleResponses,
+      retentionExpiries: counters.retentionExpiries,
+      renderer: this.renderer.getStats(),
+    };
   }
 
   /** Release this dataset's GPU resources. The WebGL context itself is owned

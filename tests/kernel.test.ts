@@ -202,7 +202,7 @@ describe("residency cache", () => {
   const manifest = loadManifest("small");
   const h = buildHierarchy(manifest);
 
-  function fakeCache(maxConcurrent = 4, inflightBudget = 1e9) {
+  function fakeCache(maxConcurrent = 4, inflightBudget = 1e9, residentByteBudget = 1e9) {
     const events: CacheEvent[] = [];
     const pending: Array<{ node: number; resolve: (v: LoadedPayload) => void; reject: (e: unknown) => void }> = [];
     const fetchImpl: FetchFn = (node, signal) => new Promise((resolve, reject) => {
@@ -215,10 +215,11 @@ describe("residency cache", () => {
       }, { once: true });
     });
     const cache = new ResidencyCache({
-      residentByteBudget: 1e9,
+      residentByteBudget,
       inflightByteBudget: inflightBudget,
       maxConcurrent,
       retryBackoffMs: 1,
+      retentionMs: 10_000,
       fetch: fetchImpl,
       onChange: (e) => events.push(e),
       hooks: { parent: (n) => h.parent[n], depth: (n) => h.nodes[n].depth },
@@ -306,6 +307,184 @@ describe("residency cache", () => {
     await flush();
     expect(cache.residentCount()).toBeGreaterThan(0);
     expect(cache.snapshot().evictions).toBeGreaterThanOrEqual(0);
+  });
+});
+
+/**
+ * Regression: budget reclamation used to drop a block that left the cut before
+ * its coarse replacement was resident. Combined with a shrinking byte budget
+ * (which the old trim pass enforced against *all* residents) that produced a
+ * one-frame gap: the draw list referenced a slot whose payload had just been
+ * freed. These tests pin the corrected order and the generation identity.
+ */
+describe("budget reclamation", () => {
+  const manifest = loadManifest("small");
+  const h = buildHierarchy(manifest);
+  const root = h.root;
+  const ancestor = h.nodes.findIndex((_, i) => h.parent[i] === root);
+  let deep = -1;
+  for (let i = 0; i < h.nodes.length; i++) {
+    if (h.nodes[i].depth < 2) continue;
+    let p = h.parent[i];
+    while (p >= 0 && p !== ancestor) p = h.parent[p];
+    if (p === ancestor && (deep < 0 || h.nodes[i].depth > h.nodes[deep].depth)) deep = i;
+  }
+
+  function harness(residentByteBudget: number) {
+    const events: CacheEvent[] = [];
+    const pending: Array<{
+      node: number;
+      resolve: (v: LoadedPayload) => void;
+      reject: (e: unknown) => void;
+    }> = [];
+    const fetchImpl: FetchFn = (node, signal) => new Promise((resolve, reject) => {
+      pending.push({ node, resolve, reject });
+      const err = new Error("aborted");
+      err.name = "AbortError";
+      signal.addEventListener("abort", () => reject(err), { once: true });
+    });
+    const cache = new ResidencyCache({
+      residentByteBudget,
+      inflightByteBudget: Number.MAX_SAFE_INTEGER,
+      maxConcurrent: 8,
+      retryBackoffMs: 1,
+      retentionMs: 10_000,
+      fetch: fetchImpl,
+      onChange: (e) => events.push(e),
+      hooks: { parent: (n) => h.parent[n], depth: (n) => h.nodes[n].depth },
+    });
+    const deliver = async (node: number) => {
+      const i = pending.findIndex((p) => p.node === node);
+      expect(i).toBeGreaterThanOrEqual(0);
+      const [p] = pending.splice(i, 1);
+      p.resolve(loadPayload("small", h.nodes[node].path));
+      await flush();
+    };
+    return { cache, events, pending, deliver };
+  }
+  const spec = (node: number) => ({
+    node, depth: h.nodes[node].depth, priority: 0,
+    bytes: h.nodes[node].bytes, points: h.nodes[node].pointCount,
+  });
+
+  it("retains a retiring block until its replacement is resident", async () => {
+    const budget = h.nodes[root].bytes + h.nodes[deep].bytes - 1;
+    const { cache, events, deliver } = harness(budget);
+    cache.reconcile(new Set([root, ancestor, deep]), 1, [spec(root), spec(ancestor), spec(deep)]);
+    await deliver(root);
+    await deliver(deep);
+    expect(cache.has(deep)).toBe(true);
+    // The cut retires `deep` while `ancestor` is still in flight.
+    cache.reconcile(new Set([root, ancestor]), 2, []);
+    expect(cache.has(deep)).toBe(true);
+    expect(cache.snapshot().evictions).toBe(0);
+    expect(events.some((e) => e.kind === "evicted" && e.node === deep)).toBe(false);
+    expect(cache.snapshot().retainedNodes).toBe(1);
+    // The replacement arrives; now, and only now, the retiree is released.
+    await deliver(ancestor);
+    expect(cache.has(ancestor)).toBe(true);
+    expect(cache.has(deep)).toBe(false);
+  });
+
+  it("still reclaims stale blocks down to the byte cap", async () => {
+    const stale = h.nodes.findIndex((n, i) => h.nodes[i].depth === 1
+      && i !== ancestor && n.hasPayload);
+    const budget = h.nodes[root].bytes + h.nodes[stale].bytes - 1;
+    const { cache, deliver } = harness(budget);
+    // Both nodes are target, so the cap must not trim either: the target cut
+    // is coverage, and exceeding the cap by a target node is reported, not hidden.
+    cache.reconcile(new Set([root, stale]), 1, [spec(root), spec(stale)]);
+    await deliver(root);
+    await deliver(stale);
+    expect(cache.has(stale)).toBe(true);
+    // `stale` leaves the cut; root is its nearest target ancestor and resident.
+    cache.reconcile(new Set([root]), 2, []);
+    expect(cache.has(stale)).toBe(false);
+    expect(cache.has(root)).toBe(true);
+    expect(cache.snapshot().residentBytes).toBeLessThanOrEqual(budget);
+  });
+
+  it("ignores a late response for a request that already left the cut", async () => {
+    const { cache, events, deliver } = harness(1e9);
+    cache.reconcile(new Set([root, ancestor]), 1, [spec(root), spec(ancestor)]);
+    await deliver(root);
+    // `ancestor` left the cut: its request is aborted and its inflight record
+    // removed. A response arriving afterwards is stale and must not install a
+    // residency that the current cut never asked for.
+    cache.reconcile(new Set([root]), 2, []);
+    expect(cache.isInflight(ancestor)).toBe(false);
+    // Simulate the fetch machinery resolving the aborted request.
+    await deliver(ancestor);
+    expect(cache.has(ancestor)).toBe(false);
+    expect(cache.snapshot().residentNodes).toBe(1);
+    expect(events.some((e) => e.kind === "resident" && e.node === ancestor)).toBe(false);
+  });
+
+  it("tags each residency with a fresh, monotonic generation", async () => {
+    const { cache, deliver } = harness(1e9);
+    cache.reconcile(new Set([root]), 1, [spec(root)]);
+    await deliver(root);
+    const first = cache.get(root)!.generation;
+    expect(first).toBeGreaterThan(0);
+    // Force a re-fetch of the same node: the new residency must not reuse the id.
+    cache.invalidate(root);
+    cache.reconcile(new Set([root]), 2, [spec(root)]);
+    await deliver(root);
+    const second = cache.get(root)!.generation;
+    expect(second).toBeGreaterThan(first);
+  });
+
+  it("defers reclamation of a block a draw list is still using", async () => {
+    const { cache, events, deliver } = harness(1e9);
+    cache.reconcile(new Set([root, ancestor]), 1, [spec(root), spec(ancestor)]);
+    await deliver(root);
+    await deliver(ancestor);
+    const generation = cache.acquireDraw(ancestor);
+    expect(generation).toBeGreaterThan(0);
+    // `ancestor` leaves the cut while the draw list still references it. Root
+    // is resident, so without the use pin the retired block would be gone.
+    cache.reconcile(new Set([root]), 2, []);
+    expect(cache.has(ancestor)).toBe(true);
+    expect(events.some((e) => e.kind === "evicted" && e.node === ancestor)).toBe(false);
+    expect(cache.isUseComplete(ancestor)).toBe(false);
+    // Releasing with a stale generation must not unpin the current residency.
+    expect(cache.releaseDraw(ancestor, generation - 1)).toBe(false);
+    expect(cache.has(ancestor)).toBe(true);
+    // The correct release lets the cache reclaim it (root is resident).
+    expect(cache.releaseDraw(ancestor, generation)).toBe(true);
+    expect(cache.has(ancestor)).toBe(false);
+    expect(cache.snapshot().residentBytes).toBe(h.nodes[root].bytes);
+  });
+
+  it("releases retention only when the replacement is not plausibly arriving", async () => {
+    const { cache, pending, deliver } = harness(1e9);
+    cache.reconcile(new Set([root, ancestor]), 1, [spec(root), spec(ancestor)]);
+    await deliver(root);
+    await deliver(ancestor);
+    // Force the target replacement (root) to be re-fetched, and make three
+    // attempts fail. Until it is written off, the retiree must stay resident.
+    cache.invalidate(root);
+    const failRoot = async () => {
+      cache.reconcile(new Set([root]), 2, [spec(root)]);
+      const idx = pending.findIndex((p) => p.node === root);
+      expect(idx).toBeGreaterThanOrEqual(0);
+      const [request] = pending.splice(idx, 1);
+      request.reject(new Error("boom"));
+      await flush();
+      // Let the 1 ms retry backoff expire before the next attempt.
+      await new Promise((r) => setTimeout(r, 5));
+    };
+    await failRoot();
+    // Retiree leaves the cut; replacement (root) is neither resident nor
+    // written off yet, so reclamation is deferred.
+    cache.reconcile(new Set([root]), 3, []);
+    expect(cache.has(ancestor)).toBe(true);
+    expect(cache.snapshot().retentionExpiries).toBe(0);
+    await failRoot();
+    await failRoot();
+    expect(cache.failureFor(root)?.count).toBeGreaterThanOrEqual(3);
+    cache.reconcile(new Set([root]), 9, []);
+    expect(cache.has(ancestor)).toBe(false);
   });
 });
 

@@ -16,12 +16,35 @@
  * are dropped on arrival. Stale detail therefore cannot displace current
  * detail.
  *
+ * Use completion. A payload that a draw list still references is *in use*. It
+ * cannot be reclaimed until the draw list has switched away from it, because
+ * freeing the bytes under a live draw entry is exactly the flicker this cache
+ * exists to prevent. `acquireDraw`/`releaseDraw` bracket that use; the
+ * generation returned by `acquireDraw` must be passed back so a stale release
+ * (one belonging to a previous residency of the same node) cannot unpin the
+ * current one.
+ *
+ * Generations. Every residency gets a monotonically increasing generation.
+ * Eviction events, draw requests and release calls carry it. When a node slot
+ * is recycled, work belonging to the previous occupant is rejected instead of
+ * being applied to the new payload — a late upload cannot make the draw list
+ * show the old block's bytes in the new block's slot.
+ *
  * Eviction safety. The target cut is always ancestor-closed (see hierarchy.ts),
- * so every resident node's ancestors are resident too. An eviction removes a
- * node only when its nearest ancestor that is *in the new target* is already
- * resident. That is what prevents "delete the parent before its replacement
- * arrives": the coarse replacement must be on screen first. Eviction proceeds
- * deepest-first, so a whole retiring branch is removed topologically.
+ * so every drawn region has a coarse fallback on its ancestor chain. A
+ * non-target payload is reclaimed only when
+ *
+ *   (a) no draw list uses it (use complete), and
+ *   (b) its nearest ancestor in the new target cut is resident, or that
+ *       ancestor has failed repeatedly and is no longer plausibly arriving.
+ *
+ * The budget pass obeys the same rule, so while a replacement is still loading
+ * the cache may sit slightly above its byte cap instead of tearing a hole. That
+ * excess is bounded by the previous cut (the retiree set) and by load latency,
+ * and `retainedNodes`/`retainedBytes` expose it explicitly rather than hiding it
+ * in a default. A replacement that keeps failing releases the retention, so
+ * reclamation is never disabled wholesale. Eviction proceeds deepest-first, so
+ * a whole retiring branch is removed topologically.
  *
  * Failure policy. A failed node gets exponential backoff so a broken payload
  * does not spin. Its ancestor remains resident, so failure degrades detail but
@@ -38,6 +61,10 @@ export type CacheEntry = {
   points: number;
   lastUsedFrame: number;
   residentSince: number;
+  /** Monotonic id of this residency. Stale users must ignore older values. */
+  generation: number;
+  /** Live draw-list references. Reclamation waits for this to reach zero. */
+  drawUses: number;
 };
 
 export type RequestRecord = {
@@ -63,6 +90,13 @@ export type CacheCounters = {
   requestsAborted: number;
   requestsFailed: number;
   evictions: number;
+  /** Responses that arrived after their request had been superseded. */
+  staleResponses: number;
+  /** Retiring payloads held for a not-yet-resident replacement. */
+  retainedNodes: number;
+  retainedBytes: number;
+  /** Retirements forced past the replacement rule by retentionMs. */
+  retentionExpiries: number;
 };
 
 export type FetchFn = (node: NodeIndex, signal: AbortSignal) => Promise<{ views: PayloadViews; bytes: number; ms: number }>;
@@ -89,6 +123,8 @@ export type CacheOptions = {
   inflightByteBudget: number;
   maxConcurrent: number;
   retryBackoffMs: number;
+  /** Upper bound on holding a retiree whose replacement never arrives. */
+  retentionMs?: number;
   fetch: FetchFn;
   onChange: (event: CacheEvent) => void;
   hooks: CacheHooks;
@@ -103,6 +139,9 @@ export class ResidencyCache {
   private failedNodes = new Set<NodeIndex>();
   private target: ReadonlySet<NodeIndex> = new Set();
   private frame = 0;
+  private nextGeneration = 1;
+  /** When each non-target payload first became a retirement candidate. */
+  private retiredSince = new Map<NodeIndex, number>();
   private counters: CacheCounters = {
     residentBytes: 0,
     inflightBytes: 0,
@@ -117,6 +156,10 @@ export class ResidencyCache {
     requestsAborted: 0,
     requestsFailed: 0,
     evictions: 0,
+    staleResponses: 0,
+    retainedNodes: 0,
+    retainedBytes: 0,
+    retentionExpiries: 0,
   };
 
   constructor(opts: CacheOptions) {
@@ -126,6 +169,8 @@ export class ResidencyCache {
   setBudgets(residentByteBudget: number, inflightByteBudget: number) {
     this.opts.residentByteBudget = residentByteBudget;
     this.opts.inflightByteBudget = inflightByteBudget;
+    // A budget shrink must reclaim immediately, not one reconcile later.
+    this.collect();
   }
   setConcurrency(n: number) { this.opts.maxConcurrent = Math.max(1, n); }
 
@@ -139,6 +184,7 @@ export class ResidencyCache {
   residentCount(): number { return this.entries.size; }
   inflightCount(): number { return this.inflight.size; }
   entriesSnapshot(): IterableIterator<[NodeIndex, CacheEntry]> { return this.entries.entries(); }
+  generationOf(node: NodeIndex): number { return this.entries.get(node)?.generation ?? 0; }
 
   touch(node: NodeIndex) {
     const e = this.entries.get(node);
@@ -146,7 +192,47 @@ export class ResidencyCache {
   }
 
   snapshot(): CacheCounters & { failures: number } {
+    this.updateRetentionCounters();
     return { ...this.counters, failures: this.failedNodes.size };
+  }
+
+  /** True if the payload exists and no draw list is currently using it. */
+  isUseComplete(node: NodeIndex): boolean {
+    const e = this.entries.get(node);
+    return !e || e.drawUses === 0;
+  }
+
+  /**
+   * Bracket a draw-list reference. The caller must pass the returned
+   * generation back to `releaseDraw`; 0 means the payload is not resident.
+   */
+  acquireDraw(node: NodeIndex): number {
+    const e = this.entries.get(node);
+    if (!e) return 0;
+    e.drawUses++;
+    return e.generation;
+  }
+
+  releaseDraw(node: NodeIndex, generation: number): boolean {
+    const e = this.entries.get(node);
+    if (!e || e.generation !== generation) return false; // stale release
+    if (e.drawUses > 0) e.drawUses--;
+    if (e.drawUses === 0 && !this.target.has(node)) this.tryDrop(e);
+    return true;
+  }
+
+  /**
+   * True when a rendered payload may leave the draw list: it is no longer in
+   * the target cut and either a coarse replacement is resident or the bounded
+   * retention window has expired. The engine consults this before removing a
+   * rendered node; the cache itself refuses to drop in-use payloads.
+   */
+  canRetire(node: NodeIndex): boolean {
+    const e = this.entries.get(node);
+    if (!e) return false;
+    if (this.target.has(node)) return false;
+    if (this.replacementReady(node)) return true;
+    return this.retentionExpired(e, performance.now());
   }
 
   /**
@@ -166,31 +252,11 @@ export class ResidencyCache {
       this.opts.onChange({ kind: "aborted", node });
     }
 
-    // 2. Evict residents outside the target, deepest-first and only when the
-    //    nearest target ancestor is already resident (coarse replacement）。
-    const retiring = [...this.entries.values()]
-      .filter((e) => !target.has(e.node))
-      .sort((a, b) => this.opts.hooks.depth(b.node) - this.opts.hooks.depth(a.node));
-    for (const entry of retiring) {
-      const anchor = this.nearestTargetAncestor(entry.node, target);
-      if (anchor !== null && !this.entries.has(anchor)) continue;
-      this.dropEntry(entry.node, entry);
-    }
+    // 2. Reclaim payloads that left the target, deepest-first and only when
+    //    use is complete and their coarse replacement is already resident.
+    this.collect();
 
-    // 3. Enforce the resident budget, protecting nodes in the target cut.
-    let over = this.counters.residentBytes - this.opts.residentByteBudget;
-    if (over > 0) {
-      const candidates = [...this.entries.values()]
-        .filter((e) => !target.has(e.node))
-        .sort((a, b) => a.lastUsedFrame - b.lastUsedFrame);
-      for (const entry of candidates) {
-        if (over <= 0) break;
-        over -= entry.bytes;
-        this.dropEntry(entry.node, entry);
-      }
-    }
-
-    // 4. Issue loads coarse-first so coverage is restored before detail.
+    // 3. Issue loads coarse-first so coverage is restored before detail.
     const now = performance.now();
     const pending = requests
       .filter((r) => !this.entries.has(r.node) && !this.inflight.has(r.node))
@@ -228,13 +294,42 @@ export class ResidencyCache {
    * Diagnostic only: forget one resident payload so the next frame re-requests
    * it. Callers must choose a node whose parent is resident (the kernel's
    * failure-injection demo picks a cut leaf), so coverage degrades to the
-   * ancestor rather than becoming a hole.
+   * ancestor rather than becoming a hole. This intentionally overrides the
+   * use-completion pin — the engine's eviction event removes the draw entry.
    */
   invalidate(node: NodeIndex): boolean {
     const entry = this.entries.get(node);
     if (!entry) return false;
+    entry.drawUses = 0;
     this.dropEntry(node, entry);
     return true;
+  }
+
+  /** Release every residency that is safe to release and enforce the budget. */
+  collect() {
+    const now = performance.now();
+    const retiring = [...this.entries.values()]
+      .filter((e) => !this.target.has(e.node))
+      .sort((a, b) => this.opts.hooks.depth(b.node) - this.opts.hooks.depth(a.node));
+    for (const entry of retiring) {
+      this.tryDrop(entry, now);
+    }
+    this.trimToBudget(now);
+  }
+
+  /**
+   * A replacement is ready when the nearest target ancestor is resident. If
+   * that ancestor has failed repeatedly, it is not plausibly arriving; the
+   * retiree is then released so reclamation is never disabled permanently by a
+   * broken payload. Merely-slow ancestors keep the retiree on screen.
+   */
+  private replacementReady(node: NodeIndex): boolean {
+    const anchor = this.nearestTargetAncestor(node, this.target);
+    if (anchor === null) return true;
+    if (this.entries.has(anchor)) return true;
+    const failure = this.failures.get(anchor);
+    if (failure && failure.count >= 3) return true;
+    return false;
   }
 
   private nearestTargetAncestor(node: NodeIndex, target: ReadonlySet<NodeIndex>): NodeIndex | null {
@@ -246,13 +341,66 @@ export class ResidencyCache {
     return null;
   }
 
+  private retentionExpired(entry: CacheEntry, now: number): boolean {
+    let since = this.retiredSince.get(entry.node);
+    if (since === undefined) {
+      since = now;
+      this.retiredSince.set(entry.node, since);
+    }
+    return now - since >= (this.opts.retentionMs ?? 4000);
+  }
+
+  /**
+   * Reclaim one payload if all three conditions hold. Returns true when the
+   * entry was dropped. Never drops a payload a draw list still uses.
+   */
+  private tryDrop(entry: CacheEntry, now = performance.now()): boolean {
+    if (entry.drawUses > 0) return false;
+    if (this.target.has(entry.node)) return false;
+    if (!this.replacementReady(entry.node)) {
+      if (!this.retentionExpired(entry, now)) return false;
+      this.counters.retentionExpiries++;
+    }
+    this.dropEntry(entry.node, entry);
+    return true;
+  }
+
+  private trimToBudget(now: number) {
+    let over = this.counters.residentBytes - this.opts.residentByteBudget;
+    if (over <= 0) return;
+    // Never evict a target node: it is coverage. Retirees go LRU-first, and
+    // an in-use or replacement-pending payload is skipped rather than forced.
+    const candidates = [...this.entries.values()]
+      .filter((e) => !this.target.has(e.node))
+      .sort((a, b) => a.lastUsedFrame - b.lastUsedFrame);
+    for (const entry of candidates) {
+      if (over <= 0) break;
+      if (entry.drawUses > 0) continue;
+      if (!this.tryDrop(entry, now)) continue;
+      over -= entry.bytes;
+    }
+  }
+
   private dropEntry(node: NodeIndex, entry: CacheEntry) {
     this.entries.delete(node);
+    this.retiredSince.delete(node);
     this.counters.residentBytes -= entry.bytes;
     this.counters.residentPoints -= entry.points;
     this.counters.residentNodes--;
     this.counters.evictions++;
     this.opts.onChange({ kind: "evicted", node, entry });
+  }
+
+  private updateRetentionCounters() {
+    let nodes = 0;
+    let bytes = 0;
+    for (const e of this.entries.values()) {
+      if (this.target.has(e.node)) continue;
+      nodes++;
+      bytes += e.bytes;
+    }
+    this.counters.retainedNodes = nodes;
+    this.counters.retainedBytes = bytes;
   }
 
   private startRequest(node: NodeIndex, bytes: number, points: number, epoch: number) {
@@ -270,7 +418,10 @@ export class ResidencyCache {
     this.opts.fetch(node, controller.signal)
       .then(({ views, bytes: actualBytes }) => {
         const current = this.inflight.get(node);
-        if (!current || current !== rec) return;
+        if (!current || current !== rec) {
+          this.counters.staleResponses++;
+          return;
+        }
         this.inflight.delete(node);
         this.counters.inflightBytes -= rec.bytes;
         this.counters.inflightPoints -= rec.points;
@@ -284,20 +435,27 @@ export class ResidencyCache {
           points: views.header.count,
           lastUsedFrame: this.frame,
           residentSince: performance.now(),
+          generation: this.nextGeneration++,
+          drawUses: 0,
         };
         this.entries.set(node, entry);
+        this.retiredSince.delete(node);
         this.counters.residentBytes += entry.bytes;
         this.counters.residentPoints += entry.points;
         this.counters.residentNodes++;
         this.counters.loadedPointsTotal += entry.points;
         this.failures.delete(node);
         this.opts.onChange({ kind: "resident", node, entry });
-        // Trim only non-target nodes; target nodes are coverage.
-        this.evictToBudget(this.opts.residentByteBudget);
+        // The replacement for whatever this node supersedes has arrived;
+        // reclaim the predecessor now rather than waiting for the next frame.
+        this.collect();
       })
       .catch((err: unknown) => {
         const current = this.inflight.get(node);
-        if (!current || current !== rec) return;
+        if (!current || current !== rec) {
+          this.counters.staleResponses++;
+          return;
+        }
         this.inflight.delete(node);
         this.counters.inflightBytes -= rec.bytes;
         this.counters.inflightPoints -= rec.points;
@@ -321,28 +479,13 @@ export class ResidencyCache {
       });
   }
 
-  private evictToBudget(budget: number) {
-    let over = this.counters.residentBytes - budget;
-    if (over <= 0) return;
-    // Never evict a node in the current target cut: it is coverage. Stale
-    // residents outside the cut are trimmed first; if that is not enough the
-    // cache is allowed to exceed its byte budget rather than tear a hole.
-    const candidates = [...this.entries.values()]
-      .filter((e) => !this.target.has(e.node))
-      .sort((a, b) => a.lastUsedFrame - b.lastUsedFrame);
-    for (const entry of candidates) {
-      if (over <= 0) break;
-      over -= entry.bytes;
-      this.dropEntry(entry.node, entry);
-    }
-  }
-
   clear() {
     for (const rec of this.inflight.values()) rec.controller.abort();
     this.inflight.clear();
     this.entries.clear();
     this.failures.clear();
     this.failedNodes.clear();
+    this.retiredSince.clear();
     this.counters = {
       ...this.counters,
       residentBytes: 0,
@@ -351,6 +494,8 @@ export class ResidencyCache {
       inflightPoints: 0,
       residentNodes: 0,
       inflightRequests: 0,
+      retainedNodes: 0,
+      retainedBytes: 0,
     };
   }
 }

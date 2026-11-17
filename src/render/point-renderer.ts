@@ -30,6 +30,16 @@ export type RenderStats = {
   objects: number;
   geometriesCreated: number;
   geometriesDisposed: number;
+  /** Uploads rejected because a newer residency already owned the slot. */
+  staleUploads: number;
+  /** Removals ignored because the rendered entry belonged to an older one. */
+  staleRemovals: number;
+};
+
+type DrawEntry = {
+  points: THREE.Points;
+  /** Residency generation this entry was uploaded from. */
+  generation: number;
 };
 
 export type HoverHit = {
@@ -106,7 +116,7 @@ void main() {
 
 export class PointRenderer {
   readonly scene: THREE.Scene;
-  private objects = new Map<NodeIndex, THREE.Points>();
+  private objects = new Map<NodeIndex, DrawEntry>();
   private material: THREE.ShaderMaterial;
   private hierarchy: Hierarchy;
   private display: PointCloudDisplay = "colour";
@@ -117,6 +127,8 @@ export class PointRenderer {
     objects: 0,
     geometriesCreated: 0,
     geometriesDisposed: 0,
+    staleUploads: 0,
+    staleRemovals: 0,
   };
 
   constructor(hierarchy: Hierarchy) {
@@ -149,9 +161,24 @@ export class PointRenderer {
       mode === "colour" ? 0 : mode === "intensity" ? 1 : mode === "normal" ? 2 : mode === "scan" ? 3 : 4;
   }
 
-  /** Upload one resident payload. Called once per node per residency. */
-  addNode(node: NodeIndex, views: PayloadViews) {
-    if (this.objects.has(node)) return;
+  /**
+   * Upload one resident payload. `generation` is the cache residency id; if
+   * the node is already drawn from a different generation, the older entry is
+   * dropped first so the map never aliases two payloads to one slot.
+   */
+  addNode(node: NodeIndex, views: PayloadViews, generation: number) {
+    const existing = this.objects.get(node);
+    if (existing) {
+      if (existing.generation >= generation) {
+        // A newer residency already owns this slot; this upload is stale.
+        this.stats.staleUploads++;
+        return;
+      }
+      this.scene.remove(existing.points);
+      existing.points.geometry.dispose();
+      this.objects.delete(node);
+      this.stats.geometriesDisposed++;
+    }
     const count = views.header.count;
     const geo = new THREE.BufferGeometry();
     geo.setAttribute("position", new THREE.BufferAttribute(views.positions, 3));
@@ -178,20 +205,41 @@ export class PointRenderer {
     pts.frustumCulled = false; // node-level frustum culling happens in selection
     pts.renderOrder = this.hierarchy.nodes[node].depth;
     pts.userData.node = node;
+    pts.userData.generation = generation;
     this.scene.add(pts);
-    this.objects.set(node, pts);
+    this.objects.set(node, { points: pts, generation });
     this.stats.geometriesCreated++;
     this.refreshCounters();
   }
 
-  removeNode(node: NodeIndex) {
-    const pts = this.objects.get(node);
-    if (!pts) return;
-    this.scene.remove(pts);
-    pts.geometry.dispose();
+  /**
+   * Remove a drawn payload. When `generation` is supplied it must match the
+   * entry's; a mismatched removal belongs to a previous residency and is
+   * ignored so a recycled node cannot lose its current geometry.
+   */
+  removeNode(node: NodeIndex, generation?: number) {
+    const entry = this.objects.get(node);
+    if (!entry) return;
+    if (generation !== undefined && entry.generation !== generation) {
+      this.stats.staleRemovals++;
+      return;
+    }
+    this.scene.remove(entry.points);
+    entry.points.geometry.dispose();
     this.objects.delete(node);
     this.stats.geometriesDisposed++;
     this.refreshCounters();
+  }
+
+  /** Refresh the draw-list generation for a node already drawn. */
+  touchDraw(node: NodeIndex, generation: number) {
+    const entry = this.objects.get(node);
+    if (!entry) return;
+    if (entry.generation < generation) entry.generation = generation;
+  }
+
+  generationOf(node: NodeIndex): number {
+    return this.objects.get(node)?.generation ?? 0;
   }
 
   hasNode(node: NodeIndex): boolean { return this.objects.has(node); }
@@ -201,8 +249,8 @@ export class PointRenderer {
   private refreshCounters() {
     let points = 0;
     let bytes = 0;
-    for (const pts of this.objects.values()) {
-      const n = pts.geometry.getAttribute("position").count;
+    for (const entry of this.objects.values()) {
+      const n = entry.points.geometry.getAttribute("position").count;
       points += n;
       bytes += n * 36;
     }
@@ -224,17 +272,17 @@ export class PointRenderer {
     let best: HoverHit | null = null;
     const hit = new THREE.Vector3();
     const radius = Math.max(1e-5, tolerance);
-    for (const [node, pts] of this.objects) {
-      if (!pts.geometry.boundingBox) continue;
-      if (!ray.intersectBox(pts.geometry.boundingBox, hit)) continue;
+    for (const [node, entry] of this.objects) {
+      if (!entry.points.geometry.boundingBox) continue;
+      if (!ray.intersectBox(entry.points.geometry.boundingBox, hit)) continue;
       if (hit.distanceTo(origin) > bestT + 0.2) continue;
-      const count = pts.geometry.getAttribute("position").count;
-      const pos = (pts.geometry.getAttribute("position") as THREE.BufferAttribute).array as Float32Array;
-      const col = (pts.geometry.getAttribute("aColor") as THREE.BufferAttribute).array as Uint8Array;
-      const id = (pts.geometry.getAttribute("aId") as THREE.BufferAttribute).array as Uint32Array;
-      const scanF = (pts.geometry.getAttribute("aScan") as THREE.BufferAttribute).array as Float32Array;
-      const inten = (pts.geometry.getAttribute("aIntensity") as THREE.BufferAttribute).array as Float32Array;
-      const range = (pts.geometry.getAttribute("aRange") as THREE.BufferAttribute).array as Float32Array;
+      const count = entry.points.geometry.getAttribute("position").count;
+      const pos = (entry.points.geometry.getAttribute("position") as THREE.BufferAttribute).array as Float32Array;
+      const col = (entry.points.geometry.getAttribute("aColor") as THREE.BufferAttribute).array as Uint8Array;
+      const id = (entry.points.geometry.getAttribute("aId") as THREE.BufferAttribute).array as Uint32Array;
+      const scanF = (entry.points.geometry.getAttribute("aScan") as THREE.BufferAttribute).array as Float32Array;
+      const inten = (entry.points.geometry.getAttribute("aIntensity") as THREE.BufferAttribute).array as Float32Array;
+      const range = (entry.points.geometry.getAttribute("aRange") as THREE.BufferAttribute).array as Float32Array;
       for (let i = 0; i < count; i++) {
         const px = pos[i * 3] - origin.x;
         const py = pos[i * 3 + 1] - origin.y;

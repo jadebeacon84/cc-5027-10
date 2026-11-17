@@ -42,6 +42,7 @@
             <div class="hud-row"><span>In flight</span><b id="hud-inflight">0 B</b></div>
             <div class="hud-row"><span>Nodes drawn</span><b id="hud-nodes">0</b></div>
             <div class="hud-row"><span>Camera distance</span><b id="hud-cam">0</b></div>
+            <div class="hud-row"><span>Scan stream</span><b id="hud-stream-state">—</b></div>
           </div>
           <div class="hud small" id="status-hud">
             <div class="hud-row"><span>FPS</span><b id="hud-fps">—</b></div>
@@ -128,6 +129,12 @@
           <h2>LOD state</h2>
           <div class="metrics" id="lod-metrics"></div>
           <div class="depth-chart" id="depth-chart" aria-label="Points by hierarchy depth"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Point-set integrity</h2>
+          <p class="muted">Draw list checked against the resident cut every frame. Stale slots, missing replacements and coverage holes are marked here.</p>
+          <div class="metrics" id="integrity-metrics"></div>
         </section>
 
         <section class="panel">
