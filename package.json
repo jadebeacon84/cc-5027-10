@@ -12,9 +12,7 @@
     "start": "node server/index.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:reclaim": "tsx scripts/reclaim-check.ts",
     "trajectory": "node scripts/trajectory.mjs",
-    "viewport:check": "node scripts/viewport-check.mjs",
     "setup": "npm run data:prepare && npm run build"
   },
   "dependencies": {
@@ -23,6 +21,7 @@
   "devDependencies": {
     "@types/node": "^24.0.0",
     "@types/three": "^0.187.0",
+    "playwright-core": "^1.65.1",
     "tsx": "^4.20.0",
     "typescript": "^5.9.0",
     "vite": "^7.0.0",

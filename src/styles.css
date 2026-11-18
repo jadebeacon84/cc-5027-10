@@ -119,9 +119,6 @@ button.primary:hover:not(:disabled) { background: #17415c; }
 .hud-row { display: flex; justify-content: space-between; gap: 16px; line-height: 1.65; }
 .hud-row span { color: var(--muted); }
 .hud-row b { font-weight: 550; }
-.hud-row b.bad { color: var(--bad); }
-.hud-row b.warn { color: var(--warn); }
-.hud-row b.good { color: var(--accent-2); }
 
 .legend-title { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted); margin-bottom: 7px; }
 .legend { margin-top: 8px; display: grid; gap: 4px; font-size: 11px; }

@@ -1,0 +1,31 @@
+{
+  "checks": {
+    "statusVisible": true,
+    "hudPoints": "0",
+    "deferredCounterVisible": true,
+    "budgetShrinksCut": true,
+    "budgetLimitedMarked": true,
+    "detailRestored": true,
+    "noFailedRequests": true,
+    "residencyRecovered": true
+  },
+  "budgets": {
+    "full": 152051,
+    "shrunk": {
+      "drawn": 56421,
+      "expected": 56421,
+      "budgetLimited": true,
+      "unrefined": 0
+    },
+    "restored": 152051
+  },
+  "switchRun": {
+    "after": 159818,
+    "aborted": 8,
+    "failed": 0,
+    "deferred": 0,
+    "residency": 1,
+    "before": 152051
+  },
+  "ok": true
+}

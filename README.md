@@ -7,24 +7,6 @@ are wired to the streaming kernel.
 
 The headless trajectory run writes a screenshot to `reports/trajectory-final.png`.
 
-## Graphical entry point for the scan point cloud
-
-The scan viewer is a **browser application**; the CLI is auxiliary only.
-
-```bash
-npm run dev      # development: http://localhost:5173  (scan point cloud viewport)
-npm start        # production:  http://127.0.0.1:8080   (after `npm run build`)
-```
-
-Open that URL to get the scene-streaming viewport. Pick a scan dataset from the
-**Dataset** selector (`small` / `assembly` / `cliff`), then **wheel-zoom** to
-refine the point set and drag the **Point budget** / **Screen error tolerance**
-sliders to control how much detail streams in. The point set grows
-progressively as payloads arrive; the **Point-set integrity** panel marks any
-progressive-point-set or detail-change anomaly (stale draw slot, coverage hole,
-retained replacement) and the **Scan stream** HUD row shows whether the scan is
-still streaming or has settled.
-
 ## Quick start
 
 Requirements: Node 20+ and a WebGL2 browser.
@@ -34,6 +16,13 @@ npm install
 npm run data:prepare     # generate + validate the three datasets (~1 min)
 npm run dev              # http://localhost:5173
 ```
+
+The dev-server URL above is the graphical entry to the scanned point cloud:
+it opens the streaming viewport with the dataset selector, budget controls
+and live kernel state. The command-line scripts only assist that workflow —
+`npm run data:prepare` builds the payloads the viewport streams, and
+`npm run trajectory` (below) re-drives the same kernel headlessly to verify
+it. There is no separate CLI viewer.
 
 `npm run data:prepare` writes `public/data/<dataset>/{manifest,meta}.json` and
 `nodes/*.bin`, and **fails the build** if any coverage/identity/attribute check
@@ -65,7 +54,6 @@ npm start                # http://127.0.0.1:8080
 | **Cancel loads** | aborts all in-flight requests, keeps residents |
 | **Fail next load** | next two fetches throw; the kernel keeps the coarse ancestor |
 | **Coverage probe** | rays through the viewport; reports hits vs rays through empty space |
-| **Point-set integrity** | per-frame draw-list evidence: stale slots, blocked retirements, coverage holes, retained bytes |
 | **HUD / LOD state / depth chart** | kernel `FrameStats`: drawn/selected/resident/in-flight, residency, per-depth points |
 
 Controls: drag orbits, shift-drag (or right-drag) pans, wheel zooms toward the
@@ -128,17 +116,11 @@ Resident bytes and in-flight bytes are metered separately.
 * **Safe eviction**: a resident outside the cut is only evicted once its nearest
   ancestor *in the new cut* is resident. The parent is on screen before the
   child goes away, so there is never a visible hole during a transition. The
-  same rule gates the byte-budget pass: while a replacement is still loading the
-  cache may sit slightly above its cap rather than tear a hole, and the excess
-  is reported as `retainedBytes` instead of hidden. A replacement that keeps
-  failing (3 attempts) releases the retention, so reclamation is never disabled
-  wholesale.
-* **Generations and use completion**: every residency gets a monotonic
-  generation id, carried by draw entries, eviction events and release calls. A
-  late upload or stale release belonging to a previous residency of a recycled
-  slot is rejected (counted as `staleUploads` / `staleRemovals` /
-  `staleResponses`), and a payload a draw list still references (`drawUses > 0`)
-  cannot be reclaimed.
+  byte budget is enforced under the same rule: budget eviction trims stale
+  residents least-recently-used first (deepest-first among equals), but a block
+  whose cut anchor is not resident yet is **deferred, not dropped** — the HUD
+  counts these as *Evictions deferred (anchor)* — and the cache may exceed its
+  byte budget rather than tear a hole.
 * **Load order**: coarse-first (by depth), then priority, under a concurrency
   cap and a separate in-flight byte cap.
 * **Failure policy**: a failed payload gets exponential backoff and its ancestor
@@ -185,37 +167,20 @@ fetches.
 
 ```bash
 npm run data:validate    # re-validate existing datasets against regenerated truth
-npm test                 # kernel selection/cache + dataset integrity
-npm run test:reclaim     # headless point-block reclamation evidence (CLI, auxiliary)
+npm test                 # 48 tests: kernel selection/cache + dataset integrity
 npm run build            # strict typecheck + production bundle
 npm run trajectory       # real Chromium + WebGL2 end-to-end run
-npm run viewport:check   # real Chromium: zoom + budget change in the viewport (after build)
 ```
-
-`npm run test:reclaim` is the **auxiliary** headless check for the budget-
-reclamation fix. It drives the real `ResidencyCache` through the two conditions
-that used to flash a hole — a payload retiring while its replacement is still in
-flight, and a stale block that must still be reclaimed down to the byte cap —
-and prints, per step, the drawn node/slot count, resident and retained bytes,
-the resident-byte peak, and the union/fingerprint of the point ids behind the
-draw slots. It exits non-zero on a violation. The graphical viewport above is
-the primary way to inspect the same behaviour.
-
-`npm run viewport:check` complements it by driving the actual viewport page:
-real wheel zoom and budget controls under injected latency, recording every
-animation frame's draw evidence. It fails if any frame has a stale draw slot, a
-coverage hole, or a stale upload/removal, and writes
-`reports/viewport-zoom-budget.json`.
 
 The test suite covers: ancestor closure, monotone refinement under decreasing
 tolerance, hard budget caps that stay ancestor-closed, disjoint payloads across
 all three datasets, thin-rod coverage, identity/attribute coupling (including
 tamper detection), separate resident/in-flight accounting with abort and
-backoff behaviour, and **budget reclamation**: a retiring block is retained
-until its replacement is resident, a stale block is still reclaimed to the cap,
-a late response for a superseded request is dropped, generations are monotonic,
-an in-use block is not reclaimed, and retention is released once the
-replacement has failed repeatedly.
+backoff behaviour, and budget-driven recycling under the anchor-resident rule
+(deferred eviction while a replacement ancestor is in flight or backing off,
+late arrivals that must not push out un-anchored blocks, deepest-first
+recycling order). `reports/recycling-regression.json` records the
+failure→fix evidence for that regression.
 
 ## Layout
 

@@ -1,0 +1,71 @@
+{
+  "title": "Point-block recycling under budget pressure — regression evidence",
+  "date": "2026-11-18",
+  "defect": {
+    "summary": "Budget-driven eviction ignored the safe-eviction (anchor-resident) rule. reconcile() step 3 and the arrival-side evictToBudget() recycled a resident block whose nearest ancestor in the current cut was not resident yet (still in flight or backing off after a failure). The draw list then fell back to a coarser ancestor or nothing for that region: a coverage hole / coarse flicker under late uploads or fast view switches.",
+    "rootCause": "src/kernel/cache.ts evicted non-target residents purely by byte pressure; the anchor-resident check existed only in reconcile() step 2 (cut-transition eviction), not on the budget paths.",
+    "fix": "Unified evictToBudget() with the same anchor rule as the cut-transition path: candidates are non-target residents ordered LRU then deepest-first; a candidate whose cut anchor is not resident is deferred (counted as evictionsDeferred) instead of dropped. The cache may exceed its byte budget rather than tear a hole. The point budget itself is unchanged and still a hard cap in the selector.",
+    "changedFiles": [
+      "src/kernel/cache.ts",
+      "src/kernel/engine.ts",
+      "src/ui/app.ts",
+      "tests/cache-recycling.test.ts",
+      "README.md"
+    ]
+  },
+  "minimalRepro": {
+    "script": "chain root(0) -> A(0/0) -> B(0/0/1); root+B resident (144264 bytes); A fails and backs off; byte budget shrunk to 72132 while B retires from the cut",
+    "beforeFix": "VIOLATION: B evicted while anchor A not resident -> region covered by root only (coarse hole)",
+    "afterFix": "no violation: B kept until A becomes resident; eviction deferred",
+    "budgetsAreExplicit": "all regression tests pass explicit tiny byte budgets (100/150/200 bytes); no default budget is relied on"
+  },
+  "redToGreen": {
+    "red": {
+      "command": "npx vitest run tests/cache-recycling.test.ts (against unfixed kernel)",
+      "result": "3 failed | 3 passed",
+      "failedTests": [
+        "point-block recycling under budget pressure > defers budget eviction of a retiring block until its cut anchor is resident",
+        "point-block recycling under budget pressure > does not let a late arrival push out a block whose anchor is missing",
+        "point-block recycling under budget pressure > recycles deepest-first among equally stale retirees"
+      ]
+    },
+    "green": {
+      "command": "npm test (fixed kernel)",
+      "result": "48 passed | 0 failed (6 new recycling tests included)"
+    }
+  },
+  "identityAndMemoryPeak": {
+    "method": "window.scanStream.runTrajectory() headless (Chromium + WebGL2), same fixed camera path and budgets before and after the fix; per-waypoint drawn/resident/selected points are the point-identity proxy, peak resident bytes is the memory peak",
+    "assembly": {
+      "peakDrawnPoints": 818870,
+      "peakResidentBytes": 29535384,
+      "requestsFailed": 0,
+      "settledShortfallPct": 0.0,
+      "perWaypointIdentityBeforeAfter": "identical"
+    },
+    "cliff": {
+      "peakDrawnPoints": 1199597,
+      "peakResidentBytes": 43250868,
+      "requestsFailed": 0,
+      "settledShortfallPct": 0.0,
+      "perWaypointIdentityBeforeAfter": "identical"
+    },
+    "reports": [
+      "reports/trajectory-assembly.json",
+      "reports/trajectory-cliff.json"
+    ]
+  },
+  "uiSmoke": {
+    "report": "reports/ui-smoke.json",
+    "screenshot": "reports/ui-after-fix.png",
+    "scenario": "real viewport: budget scaled 1.2M -> 60k -> 1.2M, then fast orbit/zoom view switches with 120 ms latency injection (late uploads)",
+    "checks": {
+      "statusVisible": true,
+      "deferredCounterVisible": true,
+      "budgetShrinksCut": "152051 -> 56421 drawn, budgetLimited marked",
+      "detailRestored": "-> 152051 drawn",
+      "noFailedRequests": true,
+      "residencyRecovered": "residency 1.0 after fast switches (8 aborted, 0 failed)"
+    }
+  }
+}

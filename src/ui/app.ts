@@ -4,7 +4,7 @@
  * per-frame stats, cache events and selection snapshot.
  */
 import * as THREE from "three";
-import { StreamingEngine, type DrawEvidence, type FrameStats } from "../kernel/engine";
+import { StreamingEngine, type FrameStats } from "../kernel/engine";
 import type { CacheEvent } from "../kernel/cache";
 import type { ManifestBundle } from "../kernel/loader";
 import type { HoverHit, PointCloudDisplay } from "../render/point-renderer";
@@ -194,8 +194,6 @@ async function loadDataset(name: string) {
   $("#traj-metrics").innerHTML = "";
   $("#coverage-metrics").innerHTML = "";
   $("#failure-metrics").innerHTML = "";
-  $("#integrity-metrics").innerHTML = "";
-  lastIntegrityKey = "";
   $("#toast").className = "toast";
   $("#status-errors").textContent = "";
   $<HTMLButtonElement>("#btn-export-traj").disabled = true;
@@ -246,16 +244,12 @@ function resizeCanvas(s: AppState) {
 }
 
 function updateHud(s: AppState, st: FrameStats) {
-  const evidence = s.engine.drawEvidence();
   $("#hud-points").textContent = fmtInt(st.drawnPoints);
   $("#hud-budget").textContent = fmtInt(st.pointBudget);
   $("#hud-resident").textContent = fmtBytes(st.residentBytes);
   $("#hud-inflight").textContent = fmtBytes(st.inflightBytes);
   $("#hud-nodes").textContent = `${fmtInt(st.drawnNodes)} / ${fmtInt(st.selectedNodes)}`;
   $("#hud-cam").textContent = st.cameraDistance.toFixed(2);
-  const stream = streamState(st, evidence);
-  $("#hud-stream-state").textContent = stream.label;
-  $("#hud-stream-state").className = stream.cls;
   $("#hud-fps").textContent = String(st.fps);
   $("#hud-frame").textContent = fmtDur(st.dt);
   $("#hud-sse").textContent = st.sseTolerance.toFixed(2);
@@ -276,31 +270,10 @@ function updateHud(s: AppState, st: FrameStats) {
       `${st.requestsCompleted} / ${st.requestsAborted} / ${st.requestsFailed}`,
       st.requestsFailed > 0 ? "bad" : ""],
     ["Evictions", fmtInt(st.evictions), ""],
+    ["Evictions deferred (anchor)", fmtInt(st.evictionsDeferred),
+      st.evictionsDeferred > 0 ? "warn" : "good"],
     ["Budget-limited", st.budgetLimited ? "yes" : "no", st.budgetLimited ? "warn" : "good"],
   ]);
-
-  const staleSlots = evidence.staleDraws;
-  const uncovered = evidence.uncoveredNodes;
-  $("#integrity-metrics").innerHTML = metricRows([
-    ["Drawn nodes", fmtInt(evidence.drawnNodes), ""],
-    ["Stale draw slots", String(staleSlots), staleSlots > 0 ? "bad" : "good"],
-    ["Replacing (retained)", String(evidence.drawnRetiring),
-      evidence.drawnRetiring > 0 ? "warn" : "good"],
-    ["Blocked retirements", String(evidence.unresolvableRetirements),
-      evidence.unresolvableRetirements > 0 ? "warn" : "good"],
-    ["Coverage holes", String(uncovered), uncovered > 0 ? "bad" : "good"],
-    ["Coverage still loading", String(evidence.pendingCoverageNodes),
-      evidence.pendingCoverageNodes > 0 ? "warn" : "good"],
-    ["Root coverage", evidence.rootResident ? "resident" : evidence.rootInCut ? "loading" : "not in cut",
-      evidence.rootResident ? "good" : "warn"],
-    ["Retained bytes", fmtBytes(evidence.retainedBytes),
-      evidence.retainedBytes > 0 ? "warn" : "good"],
-    ["Stale uploads / removals",
-      `${evidence.renderer.staleUploads} / ${evidence.renderer.staleRemovals}`,
-      evidence.renderer.staleUploads + evidence.renderer.staleRemovals > 0 ? "warn" : "good"],
-    ["Late responses dropped", String(evidence.staleResponses), ""],
-  ]);
-  markIntegrityAnomalies(evidence);
 
   $("#lod-metrics").innerHTML = metricRows([
     ["Drawn nodes", fmtInt(st.drawnNodes), ""],
@@ -324,42 +297,6 @@ function updateHud(s: AppState, st: FrameStats) {
     ["Average load", fmtDur(loader.avgMs), ""],
     ["Last load", fmtDur(loader.lastMs), ""],
   ]);
-}
-
-/**
- * Human-readable scan-stream state: distinguishes "nothing left to load" from
- * "still streaming" and from the anomalous states (holes, stale slots).
- */
-function streamState(st: FrameStats, e: DrawEvidence): { label: string; cls: string } {
-  if (e.staleDraws > 0 || e.uncoveredNodes > 0) return { label: "ANOMALY", cls: "bad" };
-  if (st.inflightRequests > 0 || e.pendingCoverageNodes > 0) {
-    return { label: `streaming (${st.inflightRequests} pending)`, cls: "warn" };
-  }
-  if (st.pendingNodes > 0) return { label: `waiting (${st.pendingNodes})`, cls: "warn" };
-  if (st.requestsFailed > 0) return { label: "settled · failures", cls: "warn" };
-  return { label: "settled", cls: "good" };
-}
-
-/**
- * Surface progressive-point-set / detail-change anomalies outside the metric
- * list: a stale draw slot or a coverage hole is a rendering fault, not a
- * budget hint, so it is also written to the status line and a toast.
- */
-let lastIntegrityKey = "";
-function markIntegrityAnomalies(e: DrawEvidence) {
-  const key = `${e.staleDraws}|${e.uncoveredNodes}|${e.unresolvableRetirements}`;
-  if (key === lastIntegrityKey) return;
-  lastIntegrityKey = key;
-  const anomalies: string[] = [];
-  if (e.staleDraws > 0) anomalies.push(`${e.staleDraws} stale draw slot(s)`);
-  if (e.uncoveredNodes > 0) anomalies.push(`${e.uncoveredNodes} uncovered region(s)`);
-  if (anomalies.length === 0) {
-    if ($("#status-errors").textContent.startsWith("draw list:")) setError("");
-    return;
-  }
-  const msg = `draw list: ${anomalies.join(", ")}`;
-  setError(msg);
-  showToast(`${msg}. Expected to be zero; inspect the point-set integrity panel.`, false);
 }
 
 function metricRows(rows: Array<[string, string, string]>): string {
@@ -915,7 +852,6 @@ declare global {
       ready: boolean;
       dataset: () => string | null;
       stats: () => FrameStats | null;
-      evidence: () => import("../kernel/engine").DrawEvidence | null;
       runTrajectory: () => Promise<TrajectoryReport | null>;
       setBudget: (points: number, sse: number) => void;
       loadDataset: (name: string) => Promise<void>;
@@ -940,7 +876,6 @@ function exposeAutomation() {
       s.engine.setBudgets(points, Number.POSITIVE_INFINITY, sse);
       updateBudgetLabels();
     },
-    evidence: () => state?.engine.drawEvidence() ?? null,
     loadDataset: async (name: string) => {
       $<HTMLSelectElement>("#dataset").value = name;
       await loadDataset(name);
